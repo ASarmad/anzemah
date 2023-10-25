@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Evidance;
 use App\Models\Upload;
 use App\Models\Comment;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 
@@ -31,13 +32,18 @@ class ClientController extends Controller
             $acceptcomment=Evidance::where('client_id',auth()->user()->client_id)->where('status','acceptcomment')->count();
             $notcomplete=Evidance::where('client_id',auth()->user()->client_id)->where('status','notcomplete')->count();
             
+            $diff=Carbon::parse($client->targetdate);
+            $now=Carbon::now();
+            $remining=$diff->diffInDays($now);
+
             return view('user.dashboard',
             ['client' => $client,
             'accept'=>$accept,
             'pending'=>$pending,
             'nothing'=>$nothing,
             'acceptcomment'=>$acceptcomment,
-            'notcomplete'=>$notcomplete
+            'notcomplete'=>$notcomplete,
+            'remining'=>$remining
             ]);
        
 

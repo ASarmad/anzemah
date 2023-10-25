@@ -43,19 +43,38 @@
               <div class="card-header">
                 <h3 class="card-title">Client Information</h3>
               </div>
-              <div class="card-body">
+              <div class="card-body">  
+                <div class="row">
+                <div class="col-md-4">
+                <img src="{{asset('dist/img/basata.jpeg')}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
+                </div>
+                <div class="col-md-8">
                 <h2>{{ Auth::user()->email }}</h2>
                 <h2>Regulation: <SPAN>SAQ D</SPAN></h2>
-                <div class="row">
-                  <div class="col-md-5">
-                    <span>Start Date: {{ date('d/m/Y', strtotime($client->startdate))}}</span></br>
-                    <span>End Date: {{ date('d/m/Y', strtotime($client->enddate))}}</span>
+                </div>
+                </div>
+                <div class="row pt-4 py-5">
+                  <div class="col-md-5 text-center">
+                    <span>PCI Version: 3.2.1</span></br>
+                    <span>Ref No: 01122023CAITBEE</span>
                   </div>
-                  <div class="col-md-7">
+                  <div class="col-md-7 text-center">
                     <span>Last Compliance Date: {{ date('d/m/Y', strtotime($client->lastdate))}}</span></br>
                     <span>Target Compliance Date: {{ date('d/m/Y', strtotime($client->targetdate))}}</span>
                   </div>
                 </div>
+                <h4 class="text-center"style="color:Red;">Remining Days:{{$remining}}</h4>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Certificate Information</h3>
+              </div>
+              <div class="card-body">  
+                <embed src="{{asset('dist/img/a.pdf')}}" style="width:100%;" height="300px;"/>
               </div>
             </div>
           </div>
