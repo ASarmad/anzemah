@@ -47,11 +47,11 @@
                 <h2>{{ Auth::user()->email }}</h2>
                 <h2>Regulation: <SPAN>SAQ D</SPAN></h2>
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-5">
                     <span>Start Date: {{ date('d/m/Y', strtotime($client->startdate))}}</span></br>
                     <span>End Date: {{ date('d/m/Y', strtotime($client->enddate))}}</span>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-7">
                     <span>Last Compliance Date: {{ date('d/m/Y', strtotime($client->lastdate))}}</span></br>
                     <span>Target Compliance Date: {{ date('d/m/Y', strtotime($client->targetdate))}}</span>
                   </div>

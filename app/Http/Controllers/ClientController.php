@@ -25,11 +25,11 @@ class ClientController extends Controller
 
             $client= Client::where('id',auth()->user()->client_id)->first();
 
-            $accept=Evidance::where('status','accept')->count();
-            $pending=Evidance::where('status','pending')->count();
-            $nothing=Evidance::where('status','nothing')->count();
-            $acceptcomment=Evidance::where('status','acceptcomment')->count();
-            $notcomplete=Evidance::where('status','notcomplete')->count();
+            $accept=Evidance::where('client_id',auth()->user()->client_id)->where('status','accept')->count();
+            $pending=Evidance::where('client_id',auth()->user()->client_id)->where('status','Pending')->count();
+            $nothing=Evidance::where('client_id',auth()->user()->client_id)->where('status','Not Uploaded')->count();
+            $acceptcomment=Evidance::where('client_id',auth()->user()->client_id)->where('status','acceptcomment')->count();
+            $notcomplete=Evidance::where('client_id',auth()->user()->client_id)->where('status','notcomplete')->count();
             
             return view('user.dashboard',
             ['client' => $client,
@@ -43,13 +43,28 @@ class ClientController extends Controller
 
         //return view('user.dashboard');
     }
-    public function readEvidance()
+    public function readEvidance(Request $request)
     {
-        //
         //dd(auth()->user()->client_id);
-        $evidance = DB::table('evidances')->where('client_id',auth()->user()->client_id)->get();
+        $evidance = Evidance::where('client_id',auth()->user()->client_id)->paginate(10);
         //dd($evidance);
-        return view('user.evidance', ['evidance' => $evidance]);
+        //////////////////////////////////////////////////////////////////////////
+        //$evidance = Evidance::query()->get();
+        if($request->ajax()){
+            $sort_by = $request->get('sortby');
+            $sort_type = $request->get('sorttype');
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $evidance = Evidance::query()
+                        ->where('client_id',auth()->user()->client_id)
+                        ->where('question', 'like', '%'.$query.'%')
+                        ->orderBy($sort_by, $sort_type)
+                        ->paginate(10);
+            return view('user.layouts.search', compact('evidance'))->render();
+        }
+        //////////////////////////////////////////////////////////////////////////
+        return view('user.evidance', ['evidance' => $evidance]); 
+        
     }
 
     /**
@@ -81,7 +96,14 @@ class ClientController extends Controller
         }
         Upload::create($input); 
 
-        return redirect()->back(); // kda ana 3mlt refresh ll sf7a 
+        // change the Status after upload a file //
+        $chnageStatus=Evidance::where('client_id',auth()->user()->client_id)->where('id',$request->route()->parameter('id'))->first();
+        $chnageStatus->status='Pending';
+        $chnageStatus->save();
+
+
+        // redirect to same page (refresh) //
+        return redirect()->back();
     }
 
     public function storeComment(Request $request){
@@ -137,21 +159,29 @@ class ClientController extends Controller
      */
     public function destroyFile(string $id,string $fileid)
     {
-        
+        // find the file and delete it from database //
         $file=Upload::findOrFail($fileid);
         
         File::delete(public_path("files/{$file->path}"));// ana ms7t kda al file mn al public
 
         $file->delete();
 
-        return redirect()->back();
+        // Check if there is any file left in evidance //
+        // change status to not uploaded when he delete all files uploaded in single evidance //
+        $evidance = Evidance::where('id',$id)->first();
+        //dd($evidance->uploads->isEmpty());
+        if($evidance->uploads->isEmpty())
+        {
+            $evidance->status='Not Uploaded';
+            $evidance->save();
+        }
 
+        return redirect()->back();
         //dd($file);
-    
     }
 
     /**
-     * Remove the comment on a spisific
+     * Remove the comment on a spisific evidance 
      */
     public function destroyComment(string $id,string $commentid)
     {

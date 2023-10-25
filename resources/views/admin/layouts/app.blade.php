@@ -160,7 +160,7 @@
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-user"></i>
                             <p>
-                            User
+                            Admins
                             <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -168,25 +168,25 @@
                             <li class="nav-item">
                             <a href="#" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Add User</p>
+                                <p>Add Admin</p>
                             </a>
                             </li>
                             <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>View User</p>
+                                <p>View Admins</p>
                             </a>
                             </li>
                             <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Edit User</p>
+                                <p>Edit Admin</p>
                             </a>
                             </li>
                             <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Delete User</p>
+                                <p>Delete Admin</p>
                             </a>
                             </li>
                         </ul>
@@ -201,15 +201,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{Route('addClient')}}" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Client</p>
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{Route('viewClient')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>View Client</p>
+                                <p>View Clients</p>
                             </a>
                             </li>
                             <li class="nav-item">
@@ -250,7 +250,7 @@
         <strong>Copyright &copy; 2023 <a href="https://www.anzemah.com">Anzemah</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.0
+        <b>Version</b> 1.1
         </div>
     </footer>
     <!-- Control Sidebar -->

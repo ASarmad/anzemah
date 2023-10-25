@@ -42,12 +42,12 @@
             @enderror
           </div>
 
-          <div class="icheck-primary">
+          <!-- <div class="icheck-primary">
             <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
             <label for="remember">
                 {{ __('Remember Me') }}
             </label>
-          </div>
+          </div> -->
           
           <div class="mt-4">
             <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>

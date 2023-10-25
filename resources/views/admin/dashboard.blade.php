@@ -24,7 +24,7 @@
                         <h3 class="card-title">Users Information</h3>
                      </div>
                      <div class="card-body">
-                        <h2>Total Users:</h2>
+                        <h2>Total Users: {{ $admins }}</h2>
                         <!-- <div class="row">
                            <div class="col-md-6">
                            
@@ -47,7 +47,7 @@
                         <h3 class="card-title">Clients Information</h3>
                      </div>
                      <div class="card-body">
-                        <h2>Total Clients:</h2>
+                        <h2>Total Clients:{{ $users }}</h2>
                         <!-- <div class="row">
                            <div class="col-md-6">
                            

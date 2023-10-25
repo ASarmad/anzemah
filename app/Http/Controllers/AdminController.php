@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Client;
+use App\Models\Evidance;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -12,7 +15,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $admins= User::where('role','admin')->count();
+        $users= User::where('role','user')->count();
+
+        return view('admin.dashboard',
+        ['admins' => $admins,    
+        'users'=>$users
+        ]);
     }
 
     /**
@@ -22,6 +31,13 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function addClient()
+    {
+        //
+        return view('admin.addClient');
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -37,6 +53,22 @@ class AdminController extends Controller
     public function show(string $id)
     {
         //
+    }
+
+    public function viewClient()
+    {
+        //
+        $client = User::where('role','user')->get();
+        return view('admin.viewClient', ['client' => $client]);
+    }
+    public function viewFullClient(string $id)
+    {
+        //
+        $user = User::where('id',$id)->first(); //gbt al user info
+        $client = Client::where('id',$user->client_id)->first(); //gbt al client info
+        $evidance = Evidance::where('client_id',$client->id); //gbt al questions bt3t al user 
+
+        return view('admin.viewFullClient', ['user'=>$user,'client' => $client,'evidance'=>$evidance]);
     }
 
     /**
