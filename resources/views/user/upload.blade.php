@@ -29,7 +29,7 @@
                            </div>
                            <div class="card-body">
                             <div>
-                              <i class="far fa-fw fa-file-pdf"></i><a href="{{asset('dist/img/a.pdf')}}">ref.pdf</a>
+                              <i class="far fa-fw fa-file-pdf"></i><a href="{{asset('dist/ref').'/q'.$evidances->number.'.pdf'}}"> Q{{$evidances->number}}_refrence</a>
                             </div>
                            </div>
                         </div>
