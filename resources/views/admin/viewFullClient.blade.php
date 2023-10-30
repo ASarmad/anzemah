@@ -3,8 +3,7 @@
 @section('content')
 <div class="content-wrapper">
     <div class="content-header">
-        <div class="container-fluid">
-        </div>
+        <div class="container-fluid"></div>
     </div>
     <!-- Main content -->
     <section class="content">
@@ -14,7 +13,7 @@
                   <!-- Card -->
                   <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Client Information</h3>
+                            <h3 class="card-title">Client Certificate Information</h3>
                         </div>
                         <div class="card-body">
                             <h2>{{ $user->email }}</h2>
@@ -29,8 +28,8 @@
                                 <span>Target Compliance Date: {{ date('d/m/Y', strtotime($client->targetdate))}}</span>
                             </div>
                             </div>
+                        </div>
                     </div>
-                  </div>
                   <!-- Card -->
                </div>
                <div class="col-md-6">
@@ -40,8 +39,8 @@
                         <h3 class="card-title">Client Information</h3>
                      </div>
                      <div class="card-body">
-                        <h4>Name:{{ $client->id }}</h4>
-                        <h4>Name:{{ $client->name }}</h4>
+                        <h4>ID: {{ $client->id }}</h4>
+                        <h4>Name: {{ $client->name }}</h4>
                         <h4>Phone: {{$client->phone}}</h4>
                         <h4>Address: {{$client->address}}</h4>
                      </div>
@@ -93,6 +92,7 @@
                   </tbody>
                 </table>
               </div>
+              <!-- //-->
             </div>
           </div>
         </div>

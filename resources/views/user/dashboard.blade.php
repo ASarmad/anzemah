@@ -181,7 +181,7 @@
       ],
       datasets: [
         {
-          data: [{{$nothing}},{{$notcomplete}},{{$accept}},{{$acceptcomment}},{{$pending}}],
+          data: ['{{$nothing}}','{{$notcomplete}}','{{$accept}}','{{$acceptcomment}}','{{$pending}}'],
           backgroundColor : ['#f56954', '#00a65a','#00c0ef', '#3c8dbc', '#f39c12'],
         }
       ]

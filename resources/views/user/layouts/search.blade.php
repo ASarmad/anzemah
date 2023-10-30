@@ -11,6 +11,6 @@
 @endforeach
 <tr class="text-center">
     <td colspan="12" align="center">
-        {!! $evidance->render('user.layouts.custom') !!}
+        {!! $evidance->render('user.layouts.paginator') !!}
     </td>
 </tr>
