@@ -61,6 +61,7 @@ Route::get('/contactus', function(){
 Route::post('/contactus/send', [App\Http\Controllers\ContactUsController::class, 'store'])->name('contactuscontroller')->middleware('auth');
 
 // The Admin Routes //
-Route::get('/addClient', [App\Http\Controllers\AdminController::class, 'addClient'])->name('addClient')->middleware('auth');
-Route::get('/viewClient', [App\Http\Controllers\AdminController::class, 'viewClient'])->name('viewClient')->middleware('auth');
-Route::get('/viewClient/{id}', [App\Http\Controllers\AdminController::class, 'viewFullClient'])->name('viewFullClient')->middleware('auth');
+Route::get('/adashboard/addClient', [App\Http\Controllers\AdminController::class, 'addClient'])->name('addClient')->middleware('auth');
+Route::get('/adashboard/viewClient', [App\Http\Controllers\AdminController::class, 'viewClient'])->name('viewClient')->middleware('auth');
+Route::get('/adashboard/viewClient/{id}', [App\Http\Controllers\AdminController::class, 'viewFullClient'])->name('viewFullClient')->middleware('auth');
+Route::get('/adashboard/viewClient/{id}/{file}', [App\Http\Controllers\AdminController::class, 'viewClientUploads'])->name('viewClientUploads')->middleware('auth');

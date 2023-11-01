@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Evidance;
-use Illuminate\Support\Facades\DB;
+
 
 class AdminController extends Controller
 {
@@ -61,14 +61,36 @@ class AdminController extends Controller
         $client = User::where('role','user')->get();
         return view('admin.viewClient', ['client' => $client]);
     }
-    public function viewFullClient(string $id)
+    public function viewFullClient(string $id,Request $request)
     {
         //
         $user = User::where('id',$id)->first(); //gbt al user info
         $client = Client::where('id',$user->client_id)->first(); //gbt al client info
-        $evidance = Evidance::where('client_id',$client->id); //gbt al questions bt3t al user 
+        $evidance = Evidance::where('client_id',$client->id)->paginate(10);
+        //dd($evidance);
+        //////////////////////////////////////////////////////////////////////////
+        //$evidance = Evidance::query()->get();
+        if($request->ajax()){
+            $sort_by = $request->get('sortby');
+            $sort_type = $request->get('sorttype');
+            $query = $request->get('query');
+            $query = str_replace(" ", "%", $query);
+            $evidance = Evidance::query()
+                        ->where('client_id',$client->id)
+                        ->where('question', 'like', '%'.$query.'%')
+                        ->orderBy($sort_by, $sort_type)
+                        ->paginate(10);
+            return view('user.layouts.search', compact('evidance'))->render();
+        }
 
         return view('admin.viewFullClient', ['user'=>$user,'client' => $client,'evidance'=>$evidance]);
+    }
+    public function viewClientUploads(string $id,string $file)
+    {
+        //
+        $evidance = Evidance::where('id',$file)->first();
+        return view('admin.viewClientUploads', ['evidances'=>$evidance]);
+        
     }
 
     /**

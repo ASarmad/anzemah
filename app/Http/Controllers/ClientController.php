@@ -9,7 +9,6 @@ use App\Models\Upload;
 use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
