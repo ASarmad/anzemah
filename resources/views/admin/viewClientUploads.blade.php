@@ -95,10 +95,21 @@
                   <h2 class="text-primary">Question {{$evidances->number}}</h2>
                   <p class="text-muted">{{$evidances->question}}</p>
                   <br>
-                  <div class="text-muted">
-                     <h5>Topic
-                        <b class="d-block">{{$evidances->topic}}</b>
-                      </h5>
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="text-muted">
+                           <h5>Topic
+                              <b class="d-block">{{$evidances->topic}}</b>
+                           </h5>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="text-muted">
+                           <h5>Status
+                              <b class="d-block">{{$evidances->status}}</b>
+                           </h5>
+                        </div>
+                     </div>
                   </div>
                   <h4 class="mt-5 text-muted">Files</h4>
                   <ul class="list-unstyled">
@@ -107,42 +118,6 @@
                      <li>
                         <span class="d-flex justify-content-between">
                            <div><i class="far fa-fw fa-file-word"></i><a href="{{asset('files').'/'.$upload->path}}">{{$upload->path}}</a></div>
-                           <div>
-                              <form method="post" action="{{Route('deleteFile',['id'=>$evidances->id,'fileid'=>$upload->id])}}">
-                                 @csrf
-                                 <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i></button>
-                              </form>
-                              <!-- *
-                                 *
-                                 *
-                                 * DA LO ANA H3MEL ABL MA YMS7 Y2OLH ARE U SURE ? BS LAZEM 3SHAN ASH8LHA M7TAG FRONTEND B SCRIPT SH8AL 3ALA LOOP.
-                                 *
-                                 *
-                                 -->
-                              <!-- <div class="text-center">
-                                 <button type="submit" id="delete_file-button" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i></button>
-                                 </div>
-                                 
-                                 <div id="delete_file-modal" class="modal">
-                                 <div class="modal-content">
-                                   <form method="post" action="{{Route('deleteFile',['id'=>$evidances->id,'fileid'=>$upload->id])}}">
-                                   @csrf
-                                   <div class="d-flex flex-column text-center">
-                                     <label for="delete_file-field">are you sure u want to delete the file permantly ?</label>
-                                     <div>
-                                       <button id="submit-delete_file2" class="btn btn-primary m-4">Cancel</button>
-                                       <button type="submit" id="submit-delete_file" class="btn btn-danger m-4">Delete</button>
-                                     </div>
-                                   </div>
-                                   </form>
-                                 </div>
-                                 </div> -->
-                              <!-- *
-                                 *  
-                                 *
-                                 *
-                                 -->
-                           </div>
                         </span>
                      </li>
                      <hr class="divider">
@@ -153,6 +128,27 @@
                      </li>
                      @endif
                   </ul>
+                  <div>
+                     <h5 class="mt-5" style="color:red;">Please Check all Files Before change Question Status !</h5>
+                     <div class="container">
+                        <div class="row justify-content-center">
+                           <div class="col-md-6">
+                                 <form method="get" action="{{Route('changestatus',['id'=>$evidances->id,'file'=>$evidances->id])}}" class="text-center">
+                                    @csrf
+                                    <div class="form-group mb-3">
+                                       <select name="changestatus" class="form-control">
+                                             <option value="Pass">Pass</option>
+                                             <option value="Pass Comment">Pass With Comments</option>
+                                             <option value="In Complete">In Complete</option>
+                                       </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Change Question Status</button>
+                                 </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
       </div>

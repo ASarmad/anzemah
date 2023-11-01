@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-8">
                           <h2>{{ Auth::user()->email }}</h2>
-                          <h2>Certificate: <SPAN>PCI</SPAN></h2>
+                          <h2>Certificate: <SPAN>PCI-DSS</SPAN></h2>
                         </div>
                       </div>
                       <div class="row pt-4 py-4">

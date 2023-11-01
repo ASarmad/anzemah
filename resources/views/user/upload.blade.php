@@ -93,11 +93,21 @@
                <div class="col-12 col-md-12 col-lg-6 order-1 order-md-1">
                   <h2 class="text-primary">Question {{$evidances->number}}</h2>
                   <p class="text-muted">{{$evidances->question}}</p>
-                  <br>
-                  <div class="text-muted">
-                     <h5>Topic
-                        <b class="d-block">{{$evidances->topic}}</b>
-                      </h5>
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="text-muted">
+                           <h5>Topic
+                              <b class="d-block">{{$evidances->topic}}</b>
+                           </h5>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="text-muted">
+                           <h5>Status
+                              <b class="d-block">{{$evidances->status}}</b>
+                           </h5>
+                        </div>
+                     </div>
                   </div>
                   <h4 class="mt-5 text-muted">Files</h4>
                   <ul class="list-unstyled">

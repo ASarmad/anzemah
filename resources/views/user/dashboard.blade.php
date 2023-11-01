@@ -105,7 +105,7 @@
               </div>
               <div class="card-body" >
                 <div class=" mt-5 text-center">
-                  <h1> {{$accept+$acceptcomment}}/96</h1>
+                  <h1> {{$pass+$passcomment}}/96</h1>
                   <h2>Completed</h2>
                 </div>
                 <div class="d-flex mt-5 justify-content-center">
@@ -181,7 +181,7 @@
       ],
       datasets: [
         {
-          data: ['{{$nothing}}','{{$notcomplete}}','{{$accept}}','{{$acceptcomment}}','{{$pending}}'],
+          data: ['{{$nothing}}','{{$notcomplete}}','{{$pass}}','{{$passcomment}}','{{$pending}}'],
           backgroundColor : ['#f56954', '#00a65a','#00c0ef', '#3c8dbc', '#f39c12'],
         }
       ]

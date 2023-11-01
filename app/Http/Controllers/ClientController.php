@@ -25,11 +25,11 @@ class ClientController extends Controller
 
             $client= Client::where('id',auth()->user()->client_id)->first();
 
-            $accept=Evidance::where('client_id',auth()->user()->client_id)->where('status','accept')->count();
+            $pass=Evidance::where('client_id',auth()->user()->client_id)->where('status','Pass')->count();
             $pending=Evidance::where('client_id',auth()->user()->client_id)->where('status','Pending')->count();
             $nothing=Evidance::where('client_id',auth()->user()->client_id)->where('status','Not Uploaded')->count();
-            $acceptcomment=Evidance::where('client_id',auth()->user()->client_id)->where('status','acceptcomment')->count();
-            $notcomplete=Evidance::where('client_id',auth()->user()->client_id)->where('status','notcomplete')->count();
+            $passcomment=Evidance::where('client_id',auth()->user()->client_id)->where('status','Pass Comment')->count();
+            $notcomplete=Evidance::where('client_id',auth()->user()->client_id)->where('status','In Complete')->count();
             
             $diff=Carbon::parse($client->targetdate);
             $now=Carbon::now();
@@ -37,10 +37,10 @@ class ClientController extends Controller
 
             return view('user.dashboard',
             ['client' => $client,
-            'accept'=>$accept,
+            'pass'=>$pass,
             'pending'=>$pending,
             'nothing'=>$nothing,
-            'acceptcomment'=>$acceptcomment,
+            'passcomment'=>$passcomment,
             'notcomplete'=>$notcomplete,
             'remining'=>$remining
             ]);

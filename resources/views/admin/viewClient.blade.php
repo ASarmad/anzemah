@@ -47,7 +47,7 @@
                       <td class="text-center">{{$record->name}}</td>
                       <td class="text-center">{{$record->email}}</td>
                       <td class="text-center">
-                        <a href="{{Route('viewFullClient', ['id' => $record->id])}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>Full View</a>
+                        <a href="{{Route('viewFullClient', ['id' => $record->id])}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
                       </td>
                     </tr>
                     @endforeach

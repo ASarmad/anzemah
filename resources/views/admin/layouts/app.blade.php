@@ -44,7 +44,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Home</a><!-- here to change the route  -->
+            <a href="{{Route('dashboardAdmin')}}" class="nav-link">Home</a><!-- here to change the route  -->
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact Us</a><!-- here to change the route  -->
@@ -166,8 +166,8 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link ">
                             <i class="nav-icon fas fa-user"></i>
                             <p>
                             Admins
@@ -201,7 +201,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item menu-open">
+                    <li class="nav-item">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
@@ -260,7 +260,7 @@
         <strong>Copyright &copy; 2023 <a href="https://www.anzemah.com">Anzemah</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.1
+        <b>Version</b> 1.2.2
         </div>
     </footer>
     <!-- Control Sidebar -->
@@ -318,6 +318,20 @@ var img_animate = document.getElementById('welcomeLogo');
 
           }
         }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach(function(navLink) {
+      navLink.addEventListener("click", function(event) {
+        navLinks.forEach(function(link) {
+          link.classList.remove("active");
+        });
+        navLink.classList.add("active");
+      });
+    });
+  });
 </script>
 </body>
 </html>

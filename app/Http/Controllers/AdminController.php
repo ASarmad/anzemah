@@ -93,6 +93,15 @@ class AdminController extends Controller
         
     }
 
+    public function ChangeUploadStatus(Request $request,string $id)
+    {
+        //
+        $evidance = Evidance::where('id',$id)->first();
+        $evidance->status=$request->input('changestatus');
+        $evidance->save();
+        return redirect()->back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
