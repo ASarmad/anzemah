@@ -30,7 +30,7 @@
                            </div>
                            <div class="card-body">
                             <div>
-                              <i class="far fa-fw fa-file-pdf"></i><a href="{{asset('dist/ref').'/q'.$evidances->number.'.pdf'}}"> Q{{$evidances->number}}_refrence</a>
+                              <i class="far fa-fw fa-file-pdf"></i><a href="{{asset('dist/ref'.'/'.$evidances->refrence)}}"> Q{{$evidances->number}}_refrence</a>
                             </div>
                            </div>
                         </div>
@@ -48,7 +48,7 @@
                                  <span class="d-flex justify-content-between">
                                     <p>{{$comment->comment}}</p>
                                     @if ($comment->user==auth()->user()->name)
-                                    <form method="post" action="{{Route('deleteComment',['id'=>$evidances->id,'commentid'=>$comment->id])}}">
+                                    <form method="post" action="{{Route('comment_destroy',['id'=>$evidances->id,'commentid'=>$comment->id])}}">
                                        @csrf
                                        <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i></button>
                                     </form>
@@ -69,7 +69,7 @@
                                  -->
                               <div id="comment-modal" class="modal">
                                  <div class="modal-content">
-                                    <form method="post" action="{{Route('comment_store',$evidances->id)}}">
+                                    <form method="post" action="{{Route('comment_create',$evidances->id)}}">
                                        @csrf
                                        <div class="d-flex flex-column text-center">
                                           <span class="close mb-3">&times;</span>

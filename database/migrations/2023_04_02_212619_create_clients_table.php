@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->timestamp('startdate')->nullable()->default('2022-01-01');
-            $table->timestamp('enddate')->nullable()->default('2023-01-01');
-            $table->timestamp('targetdate')->nullable()->default('2022-01-01');
-            $table->timestamp('lastdate')->nullable()->default('2023-01-01');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

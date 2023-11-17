@@ -14,6 +14,7 @@ class Client extends Model
         'name',
         'address',
         'phone',
+        'logo',
     ];
 
     public function users(): HasMany
@@ -21,9 +22,7 @@ class Client extends Model
         return $this->hasMany(User::class,'client_id','id');
     }
 
-    public function evidances(): HasMany
-    {
-        return $this->hasMany(Evidance::class);
+    public function certificates(){ //one to many relation
+        return $this->belongsTo(Certificate::class);
     }
-   
 }

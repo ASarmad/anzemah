@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->integer('comment_id')->unsigned()->nullable()->index();
+            $table->unsignedBigInteger('evidance_id');
+            $table->foreign('evidance_id')->references('id')->on('evidances')->onDelete('cascade');
             $table->string('comment')->nullable();
             $table->string('upload')->nullable();
             $table->string('user')->nullable();

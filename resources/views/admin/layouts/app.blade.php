@@ -46,8 +46,9 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{Route('dashboardAdmin')}}" class="nav-link">Home</a><!-- here to change the route  -->
         </li>
+
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact Us</a><!-- here to change the route  -->
+            <a href="#" class="nav-link">Setting</a><!-- here to change the route  -->
         </li>
         </ul>
 

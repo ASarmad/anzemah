@@ -7,8 +7,10 @@ use App\Models\ContactUs;
 
 class ContactUsController extends Controller
 {
-    //
-    public function store(Request $request)
+    /*
+    *   The function is to create an new Message in the Contact Us tabel.
+    */
+    public function contactUsCreate(Request $request)
     {
         $request->validate(
             ['subject' => 'required|string','message' => 'required|string']

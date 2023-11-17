@@ -46,23 +46,23 @@
               <div class="card-body">  
                 <div class="row">
                 <div class="col-md-4">
-                <img src="{{asset('dist/img').'/'.$client->name.'.jpeg'}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
+                <img src="{{asset('dist/img'.'/'.$client->logo)}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
                 </div>
                 <div class="col-md-8">
                 <h2>{{ Auth::user()->email }}</h2>
-                <h2>Regulation: <SPAN>SAQ D</SPAN></h2>
+                <h2>Certificate: <SPAN>{{$certificate->type}}</SPAN></h2>
                 </div>
                 </div>
                 <div class="row pt-4 py-4">
                   <div class="col-md-5 text-center">
-                    <span>PCI Version: 3.2.1</span></br>
-                    <span>Ref No: 01122023CAITBEE</span></br>
-                    <span>Status: <span style="color:Green;">Valid</span></span>
+                    <span>PCI Version: {{$certificate->version}}</span></br>
+                    <span>Ref No: {{$certificate->ref_number}}</span></br>
+                    <span>Status: <span style="color:Green;">{{$certificate->status}}</span></span>
                   </div>
                   <div class="col-md-7 text-center">
-                    <span>Last Compliance Date: {{ date('d/m/Y', strtotime($client->lastdate))}}</span></br>
-                    <span>Target Compliance Date: {{ date('d/m/Y', strtotime($client->targetdate))}}</span></br>
-                    <span>Remining Days: <span style="color:Red;">{{$remining}}</span></span>
+                    <span>Last Compliance Date: {{ date('d/m/Y', strtotime($certificate->lastdate))}}</span></br>
+                    <span>Target Compliance Date: {{ date('d/m/Y', strtotime($certificate->targetdate))}}</span></br>
+                    <h3>Remining Days: <span style="color:Red;">{{$remining}}</span></h3>
                   </div>
                 </div>
               </div>
@@ -74,7 +74,7 @@
                 <h3 class="card-title">Current Certificate</h3>
               </div>
               <div class="card-body">  
-                <embed src="{{asset('dist/img/a.pdf')}}" style="width:100%;" height="300px;"/>
+                <embed src="{{asset('dist/img'.'/'.$certificate->certificate_pdf)}}" style="width:100%;" height="300px;"/>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@
                   <h2>Completed</h2>
                 </div>
                 <div class="d-flex mt-5 justify-content-center">
-                  <a href="{{Route('evidance')}}" class="btn btn-primary">View Evediance</a>
+                  <a href="{{Route('evidance_read')}}" class="btn btn-primary">View Evediance</a>
                 </div> 
               </div>
             </div>
@@ -125,7 +125,7 @@
                 <!-- DONUT CHART -->
                 <canvas id="donutChart" style="min-height: 250px; height: 50px; max-height: 250px; max-width: 100%;"></canvas>
                 <div class="d-flex mt-5 justify-content-center">
-                  <a href="{{Route('evidance')}}" class="btn btn-primary">Upload Evediance</a>
+                  <a href="{{Route('evidance_read')}}" class="btn btn-primary">Upload Evediance</a>
                 </div>
               </div>
             </div>

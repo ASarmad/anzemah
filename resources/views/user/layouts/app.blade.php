@@ -103,6 +103,9 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{Route('contactus')}}" class="nav-link">Contact Us</a>
             </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{Route('setting')}}" class="nav-link">Setting</a>
+            </li>
         </ul>
 
         <!-- Right navbar Controls -->
@@ -198,7 +201,7 @@
                 </ul>
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                    <a href="{{Route('evidance')}}" class="nav-link">
+                    <a href="{{Route('evidance_read')}}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>Evediance</p>
                     </a>
@@ -239,42 +242,42 @@
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 <script>
-var img_animate = document.getElementById('welcomeLogo');
-        // Retrieve the theme mode preference from localStorage
-        var themeMode = localStorage.getItem('themeMode');
-        // If the preference exists, set the body class and icon class accordingly
-        if (themeMode === 'dark') {
-            document.body.classList.add('dark-mode');
-            document.getElementById('toggleMode').classList.remove('fa-moon');
-            document.getElementById('toggleMode').classList.add('fa-sun');
-            
-        }
-        else {
-          document.body.classList.remove('dark-mode');
-          document.getElementById('toggleMode').classList.remove('fa-sun');
-          document.getElementById('toggleMode').classList.add('fa-moon');
-         
-        }
+    var img_animate = document.getElementById('welcomeLogo');
+    // Retrieve the theme mode preference from localStorage
+    var themeMode = localStorage.getItem('themeMode');
+    // If the preference exists, set the body class and icon class accordingly
+    if (themeMode === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('toggleMode').classList.remove('fa-moon');
+        document.getElementById('toggleMode').classList.add('fa-sun');
         
-        function toggleTheme() 
-        {
-          var body = document.getElementsByTagName("body")[0];
-          var icon = document.getElementById('toggleMode');
-          if (body.classList.contains("dark-mode")) {
-            body.classList.remove("dark-mode");
-            localStorage.setItem('themeMode', 'light');
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+    }
+    else {
+        document.body.classList.remove('dark-mode');
+        document.getElementById('toggleMode').classList.remove('fa-sun');
+        document.getElementById('toggleMode').classList.add('fa-moon');
+        
+    }
+    
+    function toggleTheme() 
+    {
+        var body = document.getElementsByTagName("body")[0];
+        var icon = document.getElementById('toggleMode');
+        if (body.classList.contains("dark-mode")) {
+        body.classList.remove("dark-mode");
+        localStorage.setItem('themeMode', 'light');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
 
-          } 
-          else {
-            body.classList.add("dark-mode");
-            localStorage.setItem('themeMode', 'dark');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
+        } 
+        else {
+        body.classList.add("dark-mode");
+        localStorage.setItem('themeMode', 'dark');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
 
-          }
         }
+    }
 </script>
 </body>
 </html>

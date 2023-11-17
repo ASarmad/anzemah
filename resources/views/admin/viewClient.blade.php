@@ -36,7 +36,6 @@
                     <tr>
                       <th class="text-center">ID</th>
                       <th class="text-center">Name</th>
-                      <th class="text-center">Email</th>
                       <th class="text-center"></th>  
                     </tr>
                   </thead>
@@ -45,7 +44,6 @@
                     <tr>
                       <td class="text-center">{{$record->id}}</td>
                       <td class="text-center">{{$record->name}}</td>
-                      <td class="text-center">{{$record->email}}</td>
                       <td class="text-center">
                         <a href="{{Route('viewFullClient', ['id' => $record->id])}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
                       </td>

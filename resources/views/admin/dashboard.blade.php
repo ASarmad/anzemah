@@ -24,18 +24,7 @@
                         <h3 class="card-title">Users Information</h3>
                      </div>
                      <div class="card-body">
-                        <h2>Total Users: {{ $admins }}</h2>
-                        <!-- <div class="row">
-                           <div class="col-md-6">
-                           
-                               <span>Start Date: 1/1/2023</span></br>
-                               <span>End Date: 1/1/2024</span>
-                           </div>
-                           <div class="col-md-6">
-                               <span>Last Compliance Date: 1/1/2023</span></br>
-                               <span>Target Compliance Date: 1/1/2024</span>
-                           </div>
-                           </div> -->
+                        <h2>Total Admins: {{ $admins }}</h2>
                      </div>
                   </div>
                   <!-- Card -->
@@ -47,20 +36,34 @@
                         <h3 class="card-title">Clients Information</h3>
                      </div>
                      <div class="card-body">
-                        <h2>Total Clients:{{ $users }}</h2>
-                        <!-- <div class="row">
-                           <div class="col-md-6">
-                           
-                               <span>Start Date: 1/1/2023</span></br>
-                               <span>End Date: 1/1/2024</span>
-                           </div>
-                           <div class="col-md-6">
-                               <span>Last Compliance Date: 1/1/2023</span></br>
-                               <span>Target Compliance Date: 1/1/2024</span>
-                           </div>
-                           </div> -->
+                        <h2>Total Users:{{ $users }}</h2>
                      </div>
                   </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                  <!-- Card -->
+                  <div class="card card-primary">
+                     <div class="card-header">
+                        <h3 class="card-title">Users Information</h3>
+                     </div>
+                     <div class="card-body">
+                        <h2>Total Clients: {{ $clients }}</h2>
+                     </div>
+                  </div>
+                  <!-- Card -->
+               </div>
+               <div class="col-md-6">
+                  <!-- Card -->
+                  <!-- <div class="card card-primary">
+                     <div class="card-header">
+                        <h3 class="card-title">Clients Information</h3>
+                     </div>
+                     <div class="card-body">
+                        <h2>Total Clients:{{ $users }}</h2>
+                     </div>
+                  </div> -->
                </div>
             </div>
         </div>

@@ -29,7 +29,7 @@
                            </div>
                            <div class="card-body">
                             <div>
-                              <i class="far fa-fw fa-file-pdf"></i><a href="{{asset('dist/ref').'/q'.$evidances->number.'.pdf'}}"> Q{{$evidances->number}}_refrence</a>
+                              <i class="far fa-fw fa-file-pdf"></i><a href="{{asset('dist/ref'.'/'.$evidances->refrence)}}"> Q{{$evidances->number}}_refrence</a>
                             </div>
                            </div>
                         </div>
@@ -47,7 +47,7 @@
                                  <span class="d-flex justify-content-between">
                                     <p>{{$comment->comment}}</p>
                                     @if ($comment->user==auth()->user()->name)
-                                    <form method="post" action="{{Route('deleteComment',['id'=>$evidances->id,'commentid'=>$comment->id])}}">
+                                    <form method="post" action="{{Route('comment_destroy',['id'=>$evidances->id,'commentid'=>$comment->id])}}">
                                        @csrf
                                        <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i></button>
                                     </form>
@@ -68,7 +68,7 @@
                                  -->
                               <div id="comment-modal" class="modal">
                                  <div class="modal-content">
-                                    <form method="post" action="{{Route('comment_store',$evidances->id)}}">
+                                    <form method="post" action="{{Route('comment_create',$evidances->id)}}">
                                        @csrf
                                        <div class="d-flex flex-column text-center">
                                           <span class="close mb-3">&times;</span>
@@ -117,7 +117,7 @@
                         <span class="d-flex justify-content-between">
                            <div><i class="far fa-fw fa-file-word"></i><a href="{{asset('files').'/'.$upload->path}}">{{$upload->path}}</a></div>
                            <div>
-                              <form method="post" action="{{Route('deleteFile',['id'=>$evidances->id,'fileid'=>$upload->id])}}">
+                              <form method="post" action="{{Route('upload_destroy',['id'=>$evidances->id,'fileid'=>$upload->id])}}">
                                  @csrf
                                  <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i></button>
                               </form>
@@ -134,7 +134,7 @@
                                  
                                  <div id="delete_file-modal" class="modal">
                                  <div class="modal-content">
-                                   <form method="post" action="{{Route('deleteFile',['id'=>$evidances->id,'fileid'=>$upload->id])}}">
+                                   <form method="post" action="{{Route('upload_destroy',['id'=>$evidances->id,'fileid'=>$upload->id])}}">
                                    @csrf
                                    <div class="d-flex flex-column text-center">
                                      <label for="delete_file-field">are you sure u want to delete the file permantly ?</label>
@@ -166,7 +166,7 @@
                      <h5 class="mt-5 text-muted">Maximum file size is 6MB ONLY!</h5>
                   </div>
                   <div class="text-center mt-5 mb-3">
-                     <form method="post" action="{{Route('upload_store',$evidances->id)}}" enctype="multipart/form-data">
+                     <form method="post" action="{{Route('upload_create',$evidances->id)}}" enctype="multipart/form-data">
                         @csrf <!-- da lazem a7toh gwa ay form (mn 8erha error 419)-->
                         <div class="form-group row">
                            <div class="col-sm-1-12">

@@ -15,9 +15,10 @@ class Evidance extends Model
         'question',
     ];
 
-    public function clients(){ //one to many relation
-        return $this->belongsTo(Client::class);
-    }
+    public function certificates(): HasMany
+    {
+        return $this->hasMany(Certificate::class,'client_id','id');
+    }  
 
     public function uploads(): HasMany
     {
@@ -26,6 +27,6 @@ class Evidance extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class,'comment_id','id');
+        return $this->hasMany(Comment::class,'evidance_id','id');
     }
 }

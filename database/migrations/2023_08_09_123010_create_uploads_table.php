@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {        
             $table->id();
-            $table->integer('evidance_id')->unsigned()->nullable()->index();
+            $table->unsignedBigInteger('evidance_id');
+            $table->foreign('evidance_id')->references('id')->on('evidances')->onDelete('cascade');
             $table->string('path')->nullable();
             $table->timestamps();
         });

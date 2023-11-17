@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Evidance;
-use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Auth::routes();
 
 // The start route of the website //
 Route::get('/', function () {
@@ -28,42 +29,55 @@ Route::get('/', function () {
     }
 });
 
-Auth::routes();
-
 // the 2 main controllers for each user  to control the whole dashboard //
 Route::get('/adashboard',[App\Http\Controllers\AdminController::class, 'index'] )->name('dashboardAdmin')->middleware('auth');
 Route::get('/cdashboard',[App\Http\Controllers\ClientController::class, 'index'] )->name('dashboardClient')->middleware('auth');
-
-// The User Routes //
-Route::get('/evidance', [App\Http\Controllers\ClientController::class, 'readEvidance'])->name('evidance')->middleware('auth');
-
-Route::get('/upload/{id}', function($id){
-    //$evidances = DB::table('evidances')->whereid($id)->first();
+/*
+*
+*
+* The User Routes
+* 
+*/
+// Evidance Model //
+Route::get('/cdashboard/evidance', [App\Http\Controllers\EvidancesController::class, 'evidanceRead'])->name('evidance_read')->middleware('auth');
+Route::get('/cdashboard/evidance/{id}', function($id){
     $evidances = Evidance::whereid($id)->first();
     return view('user.upload', ['evidances' => $evidances]);
-})->name('upload')->middleware('auth');
+})->name('single_evidance_read')->middleware('auth');
 
-Route::post('/upload/{id}/store', [App\Http\Controllers\ClientController::class, 'store'])->name('upload_store')->middleware('auth');
+// Upload Model //
+Route::post('/cdashboard/evidance/{id}/create', [App\Http\Controllers\UploadsController::class, 'uploadCreate'])->name('upload_create')->middleware('auth');
+Route::post('/cdashboard/evidance/{id}/delete/{fileid}', [App\Http\Controllers\UploadsController::class, 'uploadDestroy'])->name('upload_destroy')->middleware('auth');
 
-Route::post('/upload/{id}/store/comment', [App\Http\Controllers\ClientController::class, 'storeComment'])->name('comment_store')->middleware('auth');
+// Comment Model //
+Route::post('/cdashboard/evidance/{id}/comment/create', [App\Http\Controllers\CommentsController::class, 'commentCreate'])->name('comment_create')->middleware('auth');
+Route::post('/cdashboard/evidance/{id}/comment/delete/{commentid}', [App\Http\Controllers\CommentsController::class, 'commentDestroy'])->name('comment_destroy')->middleware('auth');
 
-//Route::delete('/upload/{id}/delete/{fileid}', [App\Http\Controllers\EvidanceController::class, 'destroy'])->name('delete_file')->middleware('auth');
-//Route::get('/upload/{id}/delete/{fileid}', ['as'=>'fileid','uses'=>'EvidanceController@destroy'])->name('deleteFile')->middleware('auth');
+// User Model //
+Route::get('/cdashboard/setting', function(){
+    return view('user.setting');
+})->name('setting')->middleware('auth');
+Route::post('/cdashboard/setting/password', [App\Http\Controllers\UserController::class, 'passwordUpdate'])->name('setting_password_update')->middleware('auth');
 
-Route::post('/upload/{id}/delete/{fileid}', [App\Http\Controllers\ClientController::class, 'destroyFile'])->name('deleteFile')->middleware('auth');
-
-Route::post('/upload/{id}/deletecomment/{commentid}', [App\Http\Controllers\ClientController::class, 'destroyComment'])->name('deleteComment')->middleware('auth');
-
-Route::get('/contactus', function(){
+// Contact_Us Model //
+Route::get('/cdashboard/contactus', function(){
     return view('user.contactus');
 })->name('contactus')->middleware('auth');
+Route::post('/cdashboard/contactus/create', [App\Http\Controllers\ContactUsController::class, 'contactUsCreate'])->name('contactus_create')->middleware('auth');
 
-Route::post('/contactus/send', [App\Http\Controllers\ContactUsController::class, 'store'])->name('contactuscontroller')->middleware('auth');
+/*
+*   
+*
+* The Admin Routes 
+*
+*/
 
-// The Admin Routes //
 Route::get('/adashboard/addClient', [App\Http\Controllers\AdminController::class, 'addClient'])->name('addClient')->middleware('auth');
 Route::get('/adashboard/viewClient', [App\Http\Controllers\AdminController::class, 'viewClient'])->name('viewClient')->middleware('auth');
 Route::get('/adashboard/viewClient/{id}', [App\Http\Controllers\AdminController::class, 'viewFullClient'])->name('viewFullClient')->middleware('auth');
+/*
+*   WORKING ON
+*/
 Route::get('/adashboard/viewClient/{id}/{file}', [App\Http\Controllers\AdminController::class, 'viewClientUploads'])->name('viewClientUploads')->middleware('auth');
 Route::get('/adashboard/viewClient/{id}/{file}/update', [App\Http\Controllers\AdminController::class, 'ChangeUploadStatus'])->name('changestatus')->middleware('auth');
 

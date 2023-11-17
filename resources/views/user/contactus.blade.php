@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="col-7">
-            <form method="post" action="{{Route('contactuscontroller')}}">
+            <form method="post" action="{{Route('contactus_create')}}">
             @csrf
               <div class="form-group">
                 <label for="inputSubject">Subject</label>

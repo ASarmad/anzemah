@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('evidances', function (Blueprint $table) {
             $table->id();
-            $table->integer('client_id')->unsigned()->nullable()->index();
-            $table->integer('number');
-            $table->string('topic');
-            $table->text('question');
-            $table->string('status');
+            $table->unsignedBigInteger('certificate_id');
+            $table->foreign('certificate_id')->references('id')->on('certificates')->onDelete('cascade');
+            $table->integer('number')->nullable();
+            $table->string('topic')->nullable();
+            $table->text('question')->nullable();
+            $table->string('status')->nullable();
+            $table->string('refrence')->nullable();
             $table->timestamps();
         });
     }

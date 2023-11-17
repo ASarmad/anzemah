@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Evidance;
-
+use App\Models\Certificate;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -17,10 +18,12 @@ class AdminController extends Controller
     {
         $admins= User::where('role','admin')->count();
         $users= User::where('role','user')->count();
+        $clients=Client::count();
 
         return view('admin.dashboard',
         ['admins' => $admins,    
-        'users'=>$users
+        'users'=>$users,
+        'clients'=>$clients
         ]);
     }
 
@@ -58,32 +61,48 @@ class AdminController extends Controller
     public function viewClient()
     {
         //
-        $client = User::where('role','user')->get();
+        $client = Client::get();
         return view('admin.viewClient', ['client' => $client]);
     }
+
     public function viewFullClient(string $id,Request $request)
     {
         //
-        $user = User::where('id',$id)->first(); //gbt al user info
-        $client = Client::where('id',$user->client_id)->first(); //gbt al client info
-        $evidance = Evidance::where('client_id',$client->id)->paginate(10);
-        //dd($evidance);
-        //////////////////////////////////////////////////////////////////////////
-        //$evidance = Evidance::query()->get();
+        $client = Client::where('id',$id)->first(); 
+        $certificate=Certificate::where('client_id',$client->id)->first();
+        $evidance = Evidance::where('certificate_id',$certificate->id)->paginate(10);
+
+        $topics=Evidance::select('topic')->where('certificate_id', $certificate->id)->distinct()->get();
+
+        $diff=Carbon::parse($certificate->targetdate);
+        $now=Carbon::now();
+        $remining=$diff->diffInDays($now);
+
         if($request->ajax()){
             $sort_by = $request->get('sortby');
             $sort_type = $request->get('sorttype');
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);
-            $evidance = Evidance::query()
-                        ->where('client_id',$client->id)
+            $topic = $request->get('topic');
+            $filter = $request->get('filter');
+            if($topic=="reset"){
+                $evidance = Evidance::query()
+                        ->where('certificate_id',$certificate->id)
                         ->where('question', 'like', '%'.$query.'%')
                         ->orderBy($sort_by, $sort_type)
-                        ->paginate(10);
+                        ->paginate($filter);
+            }else{
+                $evidance = Evidance::query()
+                        ->where('certificate_id',$certificate->id)
+                        ->where('topic',$topic)
+                        ->where('question', 'like', '%'.$query.'%')
+                        ->orderBy($sort_by, $sort_type)
+                        ->paginate($filter);
+            }
             return view('user.layouts.search', compact('evidance'))->render();
         }
 
-        return view('admin.viewFullClient', ['user'=>$user,'client' => $client,'evidance'=>$evidance]);
+        return view('admin.viewFullClient', ['client' => $client,'certificate'=>$certificate,'evidance'=>$evidance,'topics'=>$topics,'remining'=>$remining]);
     }
     public function viewClientUploads(string $id,string $file)
     {
