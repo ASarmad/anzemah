@@ -61,11 +61,6 @@
                               <div class="text-center">
                                  <button type="submit" id="comment-button" class="btn btn-primary">Add Comment</button>
                               </div>
-                              <!-- 
-                                 *
-                                 *
-                                 *
-                                 -->
                               <div id="comment-modal" class="modal">
                                  <div class="modal-content">
                                     <form method="post" action="{{Route('comment_create',$evidances->id)}}">
@@ -121,36 +116,6 @@
                                  @csrf
                                  <button type="submit" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i></button>
                               </form>
-                              <!-- *
-                                 *
-                                 *
-                                 * DA LO ANA H3MEL ABL MA YMS7 Y2OLH ARE U SURE ? BS LAZEM 3SHAN ASH8LHA M7TAG FRONTEND B SCRIPT SH8AL 3ALA LOOP.
-                                 *
-                                 *
-                                 -->
-                              <!-- <div class="text-center">
-                                 <button type="submit" id="delete_file-button" class="btn btn-danger"><i class="fas fa-solid fa-trash"></i></button>
-                                 </div>
-                                 
-                                 <div id="delete_file-modal" class="modal">
-                                 <div class="modal-content">
-                                   <form method="post" action="{{Route('upload_destroy',['id'=>$evidances->id,'fileid'=>$upload->id])}}">
-                                   @csrf
-                                   <div class="d-flex flex-column text-center">
-                                     <label for="delete_file-field">are you sure u want to delete the file permantly ?</label>
-                                     <div>
-                                       <button id="submit-delete_file2" class="btn btn-primary m-4">Cancel</button>
-                                       <button type="submit" id="submit-delete_file" class="btn btn-danger m-4">Delete</button>
-                                     </div>
-                                   </div>
-                                   </form>
-                                 </div>
-                                 </div> -->
-                              <!-- *
-                                 *  
-                                 *
-                                 *
-                                 -->
                            </div>
                         </span>
                      </li>

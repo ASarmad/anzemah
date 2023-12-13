@@ -29,6 +29,7 @@
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+@include('utlities.modals')
     <div class="wrapper"><!-- feh hena 7aga 8lt mo5tlfa  -->
 
     <!-- Preloader -->
@@ -177,29 +178,16 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{Route('admin_create_form')}}" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Admin</p>
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{Route('admin_read')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View Admins</p>
                             </a>
-                            </li>
-                            <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Edit Admin</p>
-                            </a>
-                            </li>
-                            <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Delete Admin</p>
-                            </a>
-                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -212,27 +200,38 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="{{Route('addClient')}}" class="nav-link active">
+                            <a href="{{Route('client_create_form')}}" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Client</p>
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{Route('viewClient')}}" class="nav-link">
+                            <a href="{{Route('client_read')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View Clients</p>
                             </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon fas fa-file"></i>
+                            <p>
+                            Certificates
+                            <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Edit Client</p>
+                                <p>Add Certificate</p>
                             </a>
                             </li>
                             <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Delete Client</p>
+                                <p>View Certificates</p>
                             </a>
                             </li>
                         </ul>
@@ -243,6 +242,14 @@
                             <p>
                             Upcoming
                             <span class="right badge badge-danger">New</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{Route('relase')}}" class="nav-link">
+                            <i class="nav-icon fas fa-code-branch"></i>
+                            <p>
+                            Version Relase
                             </p>
                         </a>
                     </li>
@@ -282,6 +289,7 @@
 <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+
 <script>
 var img_animate = document.getElementById('welcomeLogo');
         // Retrieve the theme mode preference from localStorage
@@ -334,5 +342,7 @@ var img_animate = document.getElementById('welcomeLogo');
     });
   });
 </script>
+<script src="{{asset('plugins/bootstrap/js/bootstrap-notify.min.js')}}"></script>
+<script src="{{asset('dist/js/modal.js')}}"></script>
 </body>
 </html>

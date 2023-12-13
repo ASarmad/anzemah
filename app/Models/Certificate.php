@@ -10,6 +10,17 @@ class Certificate extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'status',
+        'type',
+        'year',
+        'version',
+        'ref_number',
+        'targetdate',
+        'lastdate',
+        'certificate_pdf',
+    ];
+
     public function clients(){ //one to many relation
         return $this->belongsTo(Client::class);
     }

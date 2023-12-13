@@ -29,6 +29,7 @@
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+@include('utlities.modals')
 <div id="app">
     <!--
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -279,5 +280,7 @@
         }
     }
 </script>
+<script src="{{asset('plugins/bootstrap/js/bootstrap-notify.min.js')}}"></script>
+<script src="{{asset('dist/js/modal.js')}}"></script>
 </body>
 </html>

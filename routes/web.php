@@ -60,24 +60,33 @@ Route::get('/cdashboard/setting', function(){
 Route::post('/cdashboard/setting/password', [App\Http\Controllers\UserController::class, 'passwordUpdate'])->name('setting_password_update')->middleware('auth');
 
 // Contact_Us Model //
-Route::get('/cdashboard/contactus', function(){
-    return view('user.contactus');
-})->name('contactus')->middleware('auth');
+Route::get('/cdashboard/contactus', function(){ return view('user.contactus'); })->name('contactus')->middleware('auth');
 Route::post('/cdashboard/contactus/create', [App\Http\Controllers\ContactUsController::class, 'contactUsCreate'])->name('contactus_create')->middleware('auth');
-
 /*
 *   
 *
 * The Admin Routes 
 *
 */
+// User Model //
+Route::get('/adashboard/addAdmin', function(){ return view('admin.addAdmin'); })->name('admin_create_form')->middleware('auth');
+Route::post('/adashboard/addAdmin/create', [App\Http\Controllers\UserController::class, 'adminCreate'])->name('admin_create')->middleware('auth');
+Route::get('/adashboard/viewAdmin', [App\Http\Controllers\UserController::class, 'adminRead'])->name('admin_read')->middleware('auth');
 
-Route::get('/adashboard/addClient', [App\Http\Controllers\AdminController::class, 'addClient'])->name('addClient')->middleware('auth');
-Route::get('/adashboard/viewClient', [App\Http\Controllers\AdminController::class, 'viewClient'])->name('viewClient')->middleware('auth');
+
+// Client Model //
+Route::get('/adashboard/addClient', function(){ return view('admin.addClient'); })->name('client_create_form')->middleware('auth');
+Route::post('/adashboard/addClient/create', [App\Http\Controllers\AdminController::class, 'clientCreate'])->name('client_create')->middleware('auth');
+Route::get('/adashboard/viewClient', [App\Http\Controllers\AdminController::class, 'clientRead'])->name('client_read')->middleware('auth');
+
 Route::get('/adashboard/viewClient/{id}', [App\Http\Controllers\AdminController::class, 'viewFullClient'])->name('viewFullClient')->middleware('auth');
-/*
-*   WORKING ON
-*/
+Route::get('/adashboard/viewClient/delete', [App\Http\Controllers\AdminController::class, ''])->name('deleteClient')->middleware('auth');
+
+// Evidance Model //
 Route::get('/adashboard/viewClient/{id}/{file}', [App\Http\Controllers\AdminController::class, 'viewClientUploads'])->name('viewClientUploads')->middleware('auth');
 Route::get('/adashboard/viewClient/{id}/{file}/update', [App\Http\Controllers\AdminController::class, 'ChangeUploadStatus'])->name('changestatus')->middleware('auth');
+
+// Version Relase //
+Route::get('/adashboard/relase', function(){ return view('admin.layouts.relase'); })->name('relase')->middleware('auth');
+
 
