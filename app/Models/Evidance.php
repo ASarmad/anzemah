@@ -17,7 +17,7 @@ class Evidance extends Model
 
     public function certificates(): HasMany
     {
-        return $this->hasMany(Certificate::class,'client_id','id');
+        return $this->hasMany(Certificate::class,'certificate_id','id');
     }  
 
     public function uploads(): HasMany

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Certificate;
 use App\Models\Evidance;
+use App\Models\Client;
 
 class EvidancesController extends Controller
 {
@@ -14,7 +15,7 @@ class EvidancesController extends Controller
     public function evidanceRead(Request $request)
     {
         // Get The Current Client Certificate //
-        $certificate =Certificate::where('client_id',auth()->user()->client_id)->first();
+        $certificate =Certificate::where('client_id',auth()->user()->client_id)->whereIn('status',['Valid','Pending'])->first();
         // Get all the Evidances of the Curent selected Certificate //
         $evidance = Evidance::where('certificate_id',$certificate->id)->paginate(10);
         // Search Filter for Evidances (Works on Current Selected Certificate) //
@@ -47,4 +48,28 @@ class EvidancesController extends Controller
         // Return to The Original Page in Route //
         return view('user.evidance', ['evidance' => $evidance,'topics'=>$topics]); 
     }
+
+    public function singleEvidanceRead($id){
+        $year = [];
+        $expiredFiles = [];
+
+        $evidances = Evidance::whereId($id)->first();
+        $question_number=$evidances->number;
+        $certificate=Certificate::where('id',$evidances->certificate_id)->first();
+        $client=Client::where('id',$certificate->client_id)->first();
+        //dd($client->certificates);
+
+        foreach($client->certificates as $certificate){
+            if($certificate->status=='Expired'){
+                $certificateExpiredYear[]=$certificate->year;
+                foreach($certificate->evidances as $evidance){
+                    if($evidance->number==$question_number){
+                        return view('user.upload', ['evidances' => $evidances,'year'=>$certificateExpiredYear,'expiredFiles'=>$evidance->uploads]);
+                    }
+                }
+            }
+            //dump($record->status);
+        }
+        //dd($client);
+        return view('user.upload', ['evidances' => $evidances, 'year' => $year, 'expiredFiles' => $expiredFiles]);    }
 }

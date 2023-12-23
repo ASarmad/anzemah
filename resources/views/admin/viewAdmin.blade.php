@@ -18,6 +18,8 @@
                     <tr>
                       <th class="text-center">ID</th>
                       <th class="text-center">Admin Name</th>
+                      <th class="text-center">Created At</th>
+                      <th class="text-center">Updated At</th>
                       <th class="text-center">Edit</th> 
                       <th class="text-center">Delete</th>
                     </tr>
@@ -27,8 +29,10 @@
                     <tr>
                       <td class="text-center">{{$record->id}}</td>
                       <td class="text-center">{{$record->name}}</td>
+                      <td class="text-center">{{$record->created_at->format('d-m-Y')}}</td>
+                      <td class="text-center">{{$record->updated_at->format('d-m-Y')}}</td>
                       <td class="text-center">
-                        <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
+                        <a href="{{Route('admin_edit_form',['id' => $record->id])}}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
                       </td>
                       <td class="text-center">
                         <a href="javascript:;" class="btn btn-danger btn-sm delete-btn" data-url="#"><i class="fa fa-trash"></i> Delete</a>

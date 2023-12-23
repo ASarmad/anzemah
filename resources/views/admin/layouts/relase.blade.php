@@ -32,6 +32,11 @@
                          <li><span>REFACTOR ALOT OF FILES AND FIX ROUTES NAME (DONE SINGLE NAMING LANGUAGE)</span></li>
                          <li><span>NEW PAGES(4)</span></li>
                          <li><span>CODE OPTIMIZATION AND BUG FIXS</span></li>
+                         <h2>VERSION 2.1.1</h2>
+                         <li><span>NEW PAGES(4)</span></li>
+                         <li><span>CODE OPTIMIZATION AND BUG FIXS</span></li>
+                         <li><span>ADD CALENDAR TO USER</span></li>
+                         <li><span>LIVE PUBLISH</span></li>
                     </div>
                </div>
             </div>

@@ -10,7 +10,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h1 class="text-center">View Clients</h1>
+                        <h1 class="text-center">View Certificates</h1>
                     </div>
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
@@ -18,6 +18,8 @@
                                 <tr>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Client Name</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Type</th>
                                     <th class="text-center">Created At</th>
                                     <th class="text-center">Updated At</th>
                                     <th class="text-center">View</th>
@@ -26,20 +28,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($client as $record)
+                                @foreach ($certificate as $record)
                                     <tr>
                                         <td class="text-center">{{ $record->id }}</td>
-                                        <td class="text-center">{{ $record->name }}</td>
+                                        <td class="text-center">{{ $record->clients}}</td>
+                                        <td class="text-center">{{ $record->status }}</td>
+                                        <td class="text-center">{{ $record->type }}</td>
                                         <td class="text-center">{{ $record->created_at->format('d-m-Y') }}</td>
                                         <td class="text-center">{{ $record->updated_at->format('d-m-Y') }}</td>
                                         <td class="text-center">
-                                            <a href="{{ Route('viewFullClient', ['id' => $record->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
+                                            <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
                                         </td>
                                         <td class="text-center">
                                             <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
                                         </td>
                                         <td class="text-center">
-                                            <a href="javascript:;" class="btn btn-danger btn-sm delete-btn" data-url="{{ Route('deleteClient', ['id' => $record->id]) }}"><i class="fa fa-trash"></i>
+                                            <a href="javascript:;" class="btn btn-danger btn-sm delete-btn" data-url="#"><i class="fa fa-trash"></i>
                                                 Delete</a>
                                         </td>
                                     </tr>

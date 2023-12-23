@@ -106,6 +106,12 @@ class AdminController extends Controller
         $client = Client::get();
         return view('admin.viewClient', ['client' => $client]);
     }
+    
+    public function certificateRead()
+    {
+        $certificate = certificate::get();
+        return view('admin.viewCertificate', ['certificate' => $certificate]);
+    }
 
     public function viewFullClient(string $id,Request $request)
     {
@@ -141,7 +147,7 @@ class AdminController extends Controller
                         ->orderBy($sort_by, $sort_type)
                         ->paginate($filter);
             }
-            return view('user.layouts.search', compact('evidance'))->render();
+            return view('admin.layouts.search', compact('evidance','client'))->render();
         }
 
         return view('admin.viewFullClient', ['client' => $client,'certificate'=>$certificate,'evidance'=>$evidance,'topics'=>$topics,'remining'=>$remining]);

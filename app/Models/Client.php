@@ -22,7 +22,8 @@ class Client extends Model
         return $this->hasMany(User::class,'client_id','id');
     }
 
-    public function certificates(){ 
+    public function certificates(): HasMany
+    { 
         return $this->hasMany(Certificate::class,'client_id','id');
     }
 }

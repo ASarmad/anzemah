@@ -21,7 +21,7 @@ class ClientController extends Controller
         // Get the Client //
         $client= Client::where('id',auth()->user()->client_id)->first(); 
         // Get Client Certificate //
-        $certificate=Certificate::where('client_id',$client->id)->first(); //TODO:make sure to select the current new certificate not  old one
+        $certificate=Certificate::where('client_id',$client->id)->whereIn('status',['Valid','Pending'])->first();
         // Get Evidance of the Certificate //
         $pass=Evidance::where('certificate_id',$certificate->id)->where('status','Pass')->count();
         $pending=Evidance::where('certificate_id',$certificate->id)->where('status','Pending')->count();

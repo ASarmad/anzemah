@@ -21,11 +21,10 @@
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
-    <!-- -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"
     integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -33,9 +32,9 @@
     <div class="wrapper"><!-- feh hena 7aga 8lt mo5tlfa  -->
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    {{-- <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__shake" src="{{asset('dist/img/AnzemahLogo2.png')}}" alt="AnzemahLogo" height="160" width="160">
-    </div>
+    </div> --}}
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -223,13 +222,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{Route('certificate_create_form')}}" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Certificate</p>
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{Route('certificate_read')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View Certificates</p>
                             </a>
@@ -237,19 +236,19 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-code"></i>
-                            <p>
-                            Upcoming
-                            <span class="right badge badge-danger">New</span>
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{Route('relase')}}" class="nav-link">
                             <i class="nav-icon fas fa-code-branch"></i>
                             <p>
                             Version Relase
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{Route('upcoming')}}" class="nav-link">
+                            <i class="nav-icon fas fa-code"></i>
+                            <p>
+                            Upcoming
+                            <span class="right badge badge-danger">New</span>
                             </p>
                         </a>
                     </li>
@@ -268,7 +267,7 @@
         <strong>Copyright &copy; 2023 <a href="https://www.anzemah.com">Anzemah</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 2.0
+        <b>Version</b> 2.1.1
         </div>
     </footer>
     <!-- Control Sidebar -->

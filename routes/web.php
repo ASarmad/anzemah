@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Evidance;
+use App\Models\Certificate;
+use App\Models\Client;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +43,7 @@ Route::get('/cdashboard',[App\Http\Controllers\ClientController::class, 'index']
 */
 // Evidance Model //
 Route::get('/cdashboard/evidance', [App\Http\Controllers\EvidancesController::class, 'evidanceRead'])->name('evidance_read')->middleware('auth');
-Route::get('/cdashboard/evidance/{id}', function($id){
-    $evidances = Evidance::whereid($id)->first();
-    return view('user.upload', ['evidances' => $evidances]);
-})->name('single_evidance_read')->middleware('auth');
+Route::get('/cdashboard/evidance/{id}', [App\Http\Controllers\EvidancesController::class, 'singleEvidanceRead'])->name('single_evidance_read')->middleware('auth');
 
 // Upload Model //
 Route::post('/cdashboard/evidance/{id}/create', [App\Http\Controllers\UploadsController::class, 'uploadCreate'])->name('upload_create')->middleware('auth');
@@ -54,9 +54,7 @@ Route::post('/cdashboard/evidance/{id}/comment/create', [App\Http\Controllers\Co
 Route::post('/cdashboard/evidance/{id}/comment/delete/{commentid}', [App\Http\Controllers\CommentsController::class, 'commentDestroy'])->name('comment_destroy')->middleware('auth');
 
 // User Model //
-Route::get('/cdashboard/setting', function(){
-    return view('user.setting');
-})->name('setting')->middleware('auth');
+Route::get('/cdashboard/setting', function(){ return view('user.setting'); })->name('setting')->middleware('auth');
 Route::post('/cdashboard/setting/password', [App\Http\Controllers\UserController::class, 'passwordUpdate'])->name('setting_password_update')->middleware('auth');
 
 // Contact_Us Model //
@@ -72,6 +70,11 @@ Route::post('/cdashboard/contactus/create', [App\Http\Controllers\ContactUsContr
 Route::get('/adashboard/addAdmin', function(){ return view('admin.addAdmin'); })->name('admin_create_form')->middleware('auth');
 Route::post('/adashboard/addAdmin/create', [App\Http\Controllers\UserController::class, 'adminCreate'])->name('admin_create')->middleware('auth');
 Route::get('/adashboard/viewAdmin', [App\Http\Controllers\UserController::class, 'adminRead'])->name('admin_read')->middleware('auth');
+Route::get('/adashboard/viewAdmin/{id}', function($id){ 
+    $user = User::whereid($id)->first();
+    return view('admin.editAdmin', ['user' => $user]);
+ })->name('admin_edit_form')->middleware('auth');
+ Route::get('/adashboard/viewAdmin/{id}/Edit', [App\Http\Controllers\UserController::class, ''])->name('admin_edit')->middleware('auth');
 
 
 // Client Model //
@@ -82,11 +85,20 @@ Route::get('/adashboard/viewClient', [App\Http\Controllers\AdminController::clas
 Route::get('/adashboard/viewClient/{id}', [App\Http\Controllers\AdminController::class, 'viewFullClient'])->name('viewFullClient')->middleware('auth');
 Route::get('/adashboard/viewClient/delete', [App\Http\Controllers\AdminController::class, ''])->name('deleteClient')->middleware('auth');
 
+// Certificate Model //
+Route::get('/adashboard/addCertificate', function(){ 
+    $clients = Client::get();
+    return view('admin.addCertificate', ['clients' => $clients]);
+ })->name('certificate_create_form')->middleware('auth');
+Route::post('/adashboard/addCertificate/create', [App\Http\Controllers\AdminController::class, ''])->name('certificate_create')->middleware('auth');
+Route::get('/adashboard/viewCertificate', [App\Http\Controllers\AdminController::class, 'certificateRead'])->name('certificate_read')->middleware('auth');
+
 // Evidance Model //
 Route::get('/adashboard/viewClient/{id}/{file}', [App\Http\Controllers\AdminController::class, 'viewClientUploads'])->name('viewClientUploads')->middleware('auth');
 Route::get('/adashboard/viewClient/{id}/{file}/update', [App\Http\Controllers\AdminController::class, 'ChangeUploadStatus'])->name('changestatus')->middleware('auth');
 
-// Version Relase //
+// Version Relase & Upcoming//
 Route::get('/adashboard/relase', function(){ return view('admin.layouts.relase'); })->name('relase')->middleware('auth');
+Route::get('/adashboard/upcoming', function(){ return view('admin.layouts.upcoming'); })->name('upcoming')->middleware('auth');
 
 
