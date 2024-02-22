@@ -1,7 +1,7 @@
 @extends('auth.layouts.app')
 
 @section('content')
-<div class="hold-transition login-page">
+<div class="hold-transition">
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">

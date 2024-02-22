@@ -28,7 +28,7 @@
                          <li><span>DO ALL VALIDATION IN THE REQUEST FOR EACH FORM</span></li>
                          <li><span>MAKE A RESPONSE AFTER DO ANY(CRED) OPREATION</span></li>
                          <li><span>MAKE SURE BEFORE DELETE ANY MESSAGE</span></li>
-                         <li><span>RE-DESIGN ALL THE FRONTEND IN ADMIN TO MEET ALL (CRED) OPREATIONS</span></li>
+                         <li><span>RE-DESIGN ALL THE FRONTEND IN ADMIN TO MEET ALL (CRUD) OPREATIONS</span></li>
                          <li><span>REFACTOR ALOT OF FILES AND FIX ROUTES NAME (DONE SINGLE NAMING LANGUAGE)</span></li>
                          <li><span>NEW PAGES(4)</span></li>
                          <li><span>CODE OPTIMIZATION AND BUG FIXS</span></li>
@@ -37,6 +37,13 @@
                          <li><span>CODE OPTIMIZATION AND BUG FIXS</span></li>
                          <li><span>ADD CALENDAR TO USER</span></li>
                          <li><span>LIVE PUBLISH</span></li>
+                         <h2>VERSION 2.2</h2>
+                         <li><span>NEW PAGES(2)</span></li>
+                         <li><span>ADDED A NEW BACKGROUND TO LOGIN</span></li>
+                         <li><span>DONE ALL (CRUD) FOR CLIENTS AND AMINS</span></li>
+                         <li><span>RE-FACTOR VARIABLE NAMES AND CHANGE ADMIN CONTROLLER</span></li>
+                         <li><span>CODE OPTIMIZATION AND BUG FIXS</span></li>
+
                     </div>
                </div>
             </div>

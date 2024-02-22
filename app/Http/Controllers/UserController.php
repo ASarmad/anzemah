@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
      /*
-    *  --------------------------------------- ADMINSTRATION FUNCTIONS --------------------------------------- *
+    *  --------------------------------------- USER FUNCTIONS --------------------------------------- *
     */
     /*
     *   The function is to update the User password in the Users tabel.
@@ -63,15 +63,33 @@ class UserController extends Controller
     /*
     *   The function is to update the admins data in the Users tabel.
     */
-    public function adminUpdate(){
-       
+    public function adminUpdate(AdminCreateRequest $request, $id){
+        try{
+            $user = User::findOrFail($id);
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $hashedPassword=Hash::make($request->password);
+            $user->password=$hashedPassword;
+            $user->update();
+            return response()->json('Data has been Updated successfully', 200);
+        } catch (\Throwable $th) {
+            //dd($th->getMessage());
+            return response()->json('Error , please try again later', 400);
+        }
     }
 
     /*
     *   The function is to soft delete an admin in from the Users tabel.
     */
-    public function adminDelete(){
-       
+    public function adminDelete($id){     
+        try{
+            $user = User::findOrFail($id);
+            $user->delete(); 
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            //dd($th->getMessage());
+            return response()->json('Error , please try again later', 400);
+        }
     }
     
 }

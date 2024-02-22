@@ -36,10 +36,10 @@
                                             <a href="{{ Route('viewFullClient', ['id' => $record->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
                                         </td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
+                                            <a href="{{ Route('client_update_form', ['id' => $record->id]) }}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
                                         </td>
                                         <td class="text-center">
-                                            <a href="javascript:;" class="btn btn-danger btn-sm delete-btn" data-url="{{ Route('deleteClient', ['id' => $record->id]) }}"><i class="fa fa-trash"></i>
+                                            <a href="javascript:;" class="btn btn-danger btn-sm delete-btn" data-url="{{ Route('client_delete', ['id' => $record->id]) }}"><i class="fa fa-trash"></i>
                                                 Delete</a>
                                         </td>
                                     </tr>

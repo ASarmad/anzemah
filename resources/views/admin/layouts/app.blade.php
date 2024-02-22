@@ -190,7 +190,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                             Clients
@@ -202,6 +202,12 @@
                             <a href="{{Route('client_create_form')}}" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add Client</p>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add User To Client</p>
                             </a>
                             </li>
                             <li class="nav-item">

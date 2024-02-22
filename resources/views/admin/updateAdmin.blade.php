@@ -14,8 +14,9 @@
                   <div class="card-header">
                      <h3 class="card-title">Edit Admin</h3>
                   </div>
-                  <form method="post" action="{{Route('admin_edit',['id' => $user->id])}}" enctype="multipart/form-data" class="ajax-form">
+                  <form method="post" action="{{Route('admin_update',['id' => $user->id])}}" enctype="multipart/form-data" class="ajax-form">
                   @csrf
+                  @method('PUT')
                      <div class="card-body">
                      <div class="form-group">
                         <label>Email address</label>

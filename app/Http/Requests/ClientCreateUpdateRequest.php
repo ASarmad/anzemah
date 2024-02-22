@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AdminCreateRequest extends FormRequest
+class ClientCreateUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,6 +33,9 @@ class AdminCreateRequest extends FormRequest
             'name' => 'required',
             'password' => 'required|min:8',
             'comfirmpassword' => 'required|same:password',
+            'address'=>'required',
+            'phone'=>'required|integer',
+            'logo' => 'required|image|mimes:jpeg,png,jpg|max:6144', // 6144 KB = 6 MB
         ];
         return $rules;
     }
@@ -44,6 +47,9 @@ class AdminCreateRequest extends FormRequest
             'name' => 'required',
             'password' => 'required|min:8',
             'comfirmpassword' => 'required|same:password',
+            'address'=>'required',
+            'phone'=>'required|integer',
+            'logo' => 'required|image|mimes:jpeg,png,jpg|max:6144', // 6144 KB = 6 MB
         ];
         return $rules;
     }
@@ -57,10 +63,14 @@ class AdminCreateRequest extends FormRequest
     {
         $attributes = [
             'email' => 'Email',
-            'name' => 'Full Name',
+            'name' => 'Name',
             'password' => 'Password',
             'comfirmpassword' => 'Comfirm Password',
+            'address'=>'Address',
+            'phone'=>'Phone Number',
+            'logo' => 'Logo',
         ];
         return $attributes;
     }
 }
+

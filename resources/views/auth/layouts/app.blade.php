@@ -21,6 +21,23 @@
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+    <style>
+    body {
+      /* Set the background image and define its properties */
+      background-image: url('dist/img/login_background.jpg');
+      background-size: cover; /* Cover the entire background */
+      background-position: center; /* Center the background image */
+      background-repeat: no-repeat; /* Do not repeat the background image */
+      height: 100vh; /* Set the height of the body to 100% of the viewport height */
+      margin: 0; /* Remove default margin */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* You can add additional styles for your content here */
+
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div id="app">

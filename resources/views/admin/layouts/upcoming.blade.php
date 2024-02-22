@@ -16,11 +16,10 @@
                         </div>
                         <div class="card-body">
                             <h2>Next Version</h2>
-                            <li><span>DO ALL (CRED) OPREATION FOR (ADMIN/CLIENT/CERTIFICATE)</span></li>
+                            <li><span>DO ALL (CRED) OPREATION FOR (CLIENT(U)/CERTIFICATE)</span></li>
                             <li><span>MAKE SURE NOT TO DELETE THE LOGGED IN USER</span></li>
                             <li><span>ADD PERMISIONS TO ADMIN USERS</span></li>
                             <li><span>ADD MORE CUSTOM REQUESTS TO ALL FORMS</span></li>
-                            <li><span>RE-FACTOR VARIABLE NAMES AND CHANGE ADMIN CONTROLLER</span></li>
                             <li><span>MORE CODE OPTIMIZATION AND BUG FIXS</span></li>
                         </div>
                     </div>

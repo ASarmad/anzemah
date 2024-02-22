@@ -12,18 +12,19 @@
                <div class="col-md-10">
                   <div class="card card-primary">
                         <div class="card-header">
-                           <h3 class="card-title">Add New Client</h3>
+                           <h3 class="card-title">Edit Client</h3>
                         </div>
-                        <form method="POST" action="{{ Route('client_create') }}" enctype="multipart/form-data" class="ajax-form">
-                           @csrf
+                        <form method="POST" action="{{ Route('client_update',['id' => $client->id]) }}" enctype="multipart/form-data" class="ajax-form">
+                        @csrf
+                        @method('PUT')
                            <div class="card-body">
                               <div class="form-group">
                                     <label>Email address</label>
-                                    <input type="email" class="form-control" name="email" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{$client->email}}">
                               </div>
                               <div class="form-group">
                                     <label>Full Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Name">
+                                    <input type="text" class="form-control" name="name" placeholder="Name" value="{{$client->name}}">
                               </div>
                               <div class="form-group">
                                     <label>Password</label>
@@ -35,18 +36,18 @@
                               </div>
                               <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" class="form-control" name="address" placeholder="Address">
+                                    <input type="text" class="form-control" name="address" placeholder="Address" value="{{$client->address}}">
                               </div>
                               <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input type="number" class="form-control" name="phone" placeholder=" Phone Number">
+                                    <input type="number" class="form-control" name="phone" placeholder=" Phone Number" value="{{$client->phone}}">
                               </div>
                               <div class="form-group">
                                     <label>Client Logo</label>
-                                    <input type="file" class="form-control" name="logo">
+                                    <input type="file" class="form-control" name="logo" value="{{$client->logo}}">
                               </div>
                               <div>
-                                    <button type="submit" class="btn btn-primary">Add New Client</button>
+                                    <button type="submit" class="btn btn-primary">Edit Client</button>
                               </div>
                         </form>
                   </div>
