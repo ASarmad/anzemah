@@ -77,6 +77,12 @@ Route::get('/adashboard/viewAdmin/{id}', function($id){
  Route::put('/adashboard/viewAdmin/{id}/Update', [App\Http\Controllers\UserController::class, 'adminUpdate'])->name('admin_update')->middleware('auth');
  Route::delete('/adashboard/viewAdmin/{id}/Delete', [App\Http\Controllers\UserController::class, 'adminDelete'])->name('admin_delete')->middleware('auth');
 
+ // User & Client Model //
+ Route::get('/adashboard/addUserToClient', function(){ return view('admin.addUserToClient'); })->name('user_client_create_form')->middleware('auth');
+  // TODO:WORKING HERE !!!!!!!!!!!!!!
+ Route::post('/adashboard/addUserToClient/create', [App\Http\Controllers\UserController::class, 'adminCreate'])->name('admin_create')->middleware('auth');
+ Route::get('/adashboard/viewClientUsers', [App\Http\Controllers\UserController::class, 'adminRead'])->name('admin_read')->middleware('auth');
+
 // Client Model //
 Route::get('/adashboard/addClient', function(){ return view('admin.addClient'); })->name('client_create_form')->middleware('auth');
 Route::post('/adashboard/addClient/create', [App\Http\Controllers\ClientController::class, 'clientCreate'])->name('client_create')->middleware('auth');
@@ -88,7 +94,7 @@ Route::get('/adashboard/viewClient/{id}', function($id){
     $client = Client::findOrFail($id);
     return view('admin.updateClient', ['client' => $client]);
  })->name('client_update_form')->middleware('auth');
-Route::put('/adashboard/viewClient/{id}/Update', [App\Http\Controllers\ClientController::class, 'clientUpdate'])->name('client_update')->middleware('auth');
+Route::put('/adashboard/viewClient/{id}/{oldLogo}/Update', [App\Http\Controllers\ClientController::class, 'clientUpdate'])->name('client_update')->middleware('auth');
 Route::delete('/adashboard/viewClient/{id}/delete', [App\Http\Controllers\ClientController::class, 'clientDelete'])->name('client_delete')->middleware('auth');
 
 // Certificate Model //

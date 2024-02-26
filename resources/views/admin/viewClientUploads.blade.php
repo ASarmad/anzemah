@@ -30,7 +30,7 @@
                            </div>
                            <div class="card-body">
                             <div>
-                              <i class="far fa-fw fa-file-pdf"></i><a href="{{asset('dist/ref'.'/'.$evidances->refrence)}}"> Q{{$evidances->number}}_refrence</a>
+                              <i class="far fa-fw fa-file-pdf"></i><a href="{{asset('ref'.'/'.$evidances->refrence)}}"> Q{{$evidances->number}}_refrence</a>
                             </div>
                            </div>
                         </div>

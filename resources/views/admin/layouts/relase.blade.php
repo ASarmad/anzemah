@@ -43,7 +43,11 @@
                          <li><span>DONE ALL (CRUD) FOR CLIENTS AND AMINS</span></li>
                          <li><span>RE-FACTOR VARIABLE NAMES AND CHANGE ADMIN CONTROLLER</span></li>
                          <li><span>CODE OPTIMIZATION AND BUG FIXS</span></li>
-
+                         <h2>VERSION 2.2.1</h2>
+                         <li><span>NEW PAGE </span></li>
+                         <li><span>FIXED ALL THE FOLDERS ON THE PUBLIC</span></li>
+                         <li><span>FIXED THE EDIT IN CLIENT ADMINISTRATION</span></li>
+                         <li><span>CODE OPTIMIZATION AND BUG FIXS</span></li>
                     </div>
                </div>
             </div>

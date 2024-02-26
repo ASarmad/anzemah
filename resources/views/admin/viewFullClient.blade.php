@@ -18,7 +18,7 @@
                     <div class="card-body">
                       <div class="row">
                         <div class="col-md-4">
-                          <img src="{{asset('dist/img'.'/'.$client->logo)}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
+                          <img src="{{asset('img/logo'.'/'.$client->logo)}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
                         </div>
                         <div class="col-md-8">
                           <h2>{{$client->name}}</h2>
@@ -50,7 +50,7 @@
                      <div class="card-body">
                       <div class="row">
                         <div class="col-md-4">
-                          <img src="{{asset('dist/img'.'/'.$client->logo)}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
+                          <img src="{{asset('img/logo'.'/'.$client->logo)}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
                         </div>
                         <div class="col-md-8">
                           <h4>ID: {{ $client->id }}</h4>

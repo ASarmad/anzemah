@@ -43,10 +43,7 @@ class ClientCreateUpdateRequest extends FormRequest
     public function onUpdate()
     {
         $rules = [
-            'email' => 'required|email',
             'name' => 'required',
-            'password' => 'required|min:8',
-            'comfirmpassword' => 'required|same:password',
             'address'=>'required',
             'phone'=>'required|integer',
             'logo' => 'required|image|mimes:jpeg,png,jpg|max:6144', // 6144 KB = 6 MB

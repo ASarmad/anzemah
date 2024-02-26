@@ -24,7 +24,7 @@
     <style>
     body {
       /* Set the background image and define its properties */
-      background-image: url('dist/img/login_background.jpg');
+      background-image: url('img/login_background.jpg');
       background-size: cover; /* Cover the entire background */
       background-position: center; /* Center the background image */
       background-repeat: no-repeat; /* Do not repeat the background image */

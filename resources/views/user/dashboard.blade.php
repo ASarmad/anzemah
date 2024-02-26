@@ -46,7 +46,7 @@
               <div class="card-body">  
                 <div class="row">
                 <div class="col-md-4">
-                <img src="{{asset('dist/img'.'/'.$client->logo)}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
+                <img src="{{asset('img/logo'.'/'.$client->logo)}}" alt="Client Logo" class="brand-image img-circle" heigth="120" width="120">
                 </div>
                 <div class="col-md-8">
                 <h2>{{ Auth::user()->email }}</h2>
@@ -75,7 +75,7 @@
                 <h3 class="card-title">Current Certificate</h3>
               </div>
               <div class="card-body">  
-                <embed src="{{asset('dist/img'.'/'.$certificate->certificate_pdf)}}" style="width:100%;" height="300px;"/>
+                <embed src="{{asset('certificates'.'/'.$certificate->certificate_pdf)}}" style="width:100%;" height="300px;"/>
               </div>
             </div>
           </div>

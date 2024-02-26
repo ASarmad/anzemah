@@ -71,7 +71,7 @@ class ClientController extends Controller
             if ($request->hasFile('logo')) {
                 $file = $request->file('logo'); 
                 $logo = $file->getClientOriginalName(); 
-                $file->move('files', $logo); 
+                $file->move('img/logo', $logo); 
                 $client['logo'] = $logo; 
             }
             $createdClient=Client::create($client);
@@ -93,21 +93,18 @@ class ClientController extends Controller
         return view('admin.viewClient', ['client' => $client]);
     }
 
-    public function clientUpdate(ClientCreateUpdateRequest $request,$id)
+    public function clientUpdate(ClientCreateUpdateRequest $request,$id,$oldLogo)
     {
         try{
             $client = Client::findOrFail($id);
             $client->name=$request->name;
-            $hashedPassword=Hash::make($request->password);
-            $client->password=$hashedPassword;
             $client->address=$request->address;
             $client->phone=$request->phone;
             if ($request->hasFile('logo')) {
-                //TODO: DELETE OLD LOGO FOR THE CLIENT
-                //File::delete(public_path("files/{$request->logo}"));
+                File::delete(public_path("img/logo/{$oldLogo}"));
                 $file = $request->file('logo'); 
                 $logo = $file->getClientOriginalName(); 
-                $file->move('files', $logo); 
+                $file->move('img/logo', $logo); 
                 $client->logo = $logo; 
             }
             $client->update();
