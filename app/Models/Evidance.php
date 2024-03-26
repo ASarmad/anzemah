@@ -11,8 +11,11 @@ class Evidance extends Model
     use HasFactory;
 
     protected $fillable = [
+        'number',
         'topic',
         'question',
+        'status',
+        'refrence',
     ];
 
     public function certificates(): HasMany

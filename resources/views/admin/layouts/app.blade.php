@@ -205,21 +205,32 @@
                             </a>
                             </li>
                             <li class="nav-item">
+                            <a href="{{Route('client_read')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>View Clients</p>
+                            </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                            Users
+                            <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
                             <a href="{{Route('user_client_create_form')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add User To Client</p>
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{Route('client_read')}}" class="nav-link">
+                            <a href="{{Route('user_read')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>View Clients</p>
-                            </a>
-                            </li>
-                            <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>View Client Users</p>
+                                <p>View Users</p>
                             </a>
                             </li>
                         </ul>
@@ -276,10 +287,10 @@
 
     <!-- Footer -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2023 <a href="https://www.anzemah.com">Anzemah</a>.</strong>
+        <strong>Copyright &copy; 2024 <a href="https://www.anzemah.com">Anzemah</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 2.1.1
+        <b>Version</b> 2.3
         </div>
     </footer>
     <!-- Control Sidebar -->

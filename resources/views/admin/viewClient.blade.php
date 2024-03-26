@@ -33,7 +33,7 @@
                                         <td class="text-center">{{ $record->created_at->format('d-m-Y') }}</td>
                                         <td class="text-center">{{ $record->updated_at->format('d-m-Y') }}</td>
                                         <td class="text-center">
-                                            <a href="{{ Route('viewFullClient', ['id' => $record->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
+                                            <a href="{{ Route('client_full_read', ['id' => $record->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
                                         </td>
                                         <td class="text-center">
                                             <a href="{{ Route('client_update_form', ['id' => $record->id]) }}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>

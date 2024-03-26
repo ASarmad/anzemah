@@ -14,32 +14,36 @@
                   <div class="card-header">
                      <h3 class="card-title">Add New User To Client</h3>
                   </div>
-                  <form method="post" action="{{Route('admin_create')}}" enctype="multipart/form-data" class="ajax-form">
+                  <form method="post" action="{{Route('user_client_create')}}" enctype="multipart/form-data" class="ajax-form">
                   @csrf
                      <div class="card-body">
                         <div class="form-group">
-                        <label>Add Certificate To Selected Client</label>
-                        <select class="custom-select" name="client">
-                            @foreach ($clients as $record)
-                                <option value="{{ $record->name }}">{{ $record->name }}</option>
-                            @endforeach
-                        </select>
+                           <label>Add User To Selected Client</label>
+                           <select class="custom-select" name="client">
+                              @foreach ($clients as $record)
+                                 <option value="{{ $record->id }}">{{ $record->name }}</option>
+                              @endforeach
+                           </select>
+                        </div> 
+                        <div class="form-group">
+                           <label>Full Name</label>
+                           <input type="text" class="form-control" name="name" placeholder="Name">
                         </div>
-                     <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" class="form-control" name="email" placeholder="Email">
-                     </div>
-                     <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Password">
-                     </div>
-                     <div class="form-group">
-                        <label>Comfirm Password</label>
-                        <input type="password" class="form-control" name="comfirmpassword" placeholder="Comfirm Password">
-                     </div>
-                     <div >
-                        <button type="submit" class="btn btn-primary">Add User To Client</button>
-                     </div>
+                        <div class="form-group">
+                           <label>Email address</label>
+                           <input type="email" class="form-control" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                           <label>Password</label>
+                           <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                           <label>Comfirm Password</label>
+                           <input type="password" class="form-control" name="comfirmpassword" placeholder="Comfirm Password">
+                        </div>
+                        <div >
+                           <button type="submit" class="btn btn-primary">Add User To Client</button>
+                        </div>
                   </form>
                </div>
             </div>

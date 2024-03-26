@@ -11,6 +11,7 @@ class Certificate extends Model
     use HasFactory;
 
     protected $fillable = [
+        'client_id',
         'status',
         'type',
         'year',
@@ -22,7 +23,7 @@ class Certificate extends Model
     ];
 
     public function clients(){ //one to many relation
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class,'client_id','id');
     }
 
     public function evidances(): HasMany

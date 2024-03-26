@@ -10,6 +10,10 @@ use App\Models\Client;
 class EvidancesController extends Controller
 {
     /*
+    *  --------------------------------------- USER FUNCTIONS --------------------------------------- *
+    */
+    /*
+    /*
     *   The function is to read an Evidance from the Evidance tabel.
     */
     public function evidanceRead(Request $request)
@@ -48,7 +52,9 @@ class EvidancesController extends Controller
         // Return to The Original Page in Route //
         return view('user.evidance', ['evidance' => $evidance,'topics'=>$topics]); 
     }
-
+    /*
+    *   The function is to read single Evidance from the Evidance tabel.
+    */
     public function singleEvidanceRead($id){
         $year = [];
         $expiredFiles = [];
@@ -71,5 +77,28 @@ class EvidancesController extends Controller
             //dump($record->status);
         }
         //dd($client);
-        return view('user.upload', ['evidances' => $evidances, 'year' => $year, 'expiredFiles' => $expiredFiles]);    }
+        return view('user.upload', ['evidances' => $evidances, 'year' => $year, 'expiredFiles' => $expiredFiles]);    
+    }
+    /*
+    *  --------------------------------------- ADMIN FUNCTIONS --------------------------------------- *
+    */
+    /*
+    *   The function is to view the client uploads from Evidance tabel.
+    */
+    public function viewClientUploads(string $id,string $file)
+    {
+        $evidance = Evidance::where('id',$file)->first();
+        return view('admin.viewClientUploads', ['evidances'=>$evidance]);
+        
+    }
+    /*
+    *   The function is to change the Evidance status from Evidance tabel.
+    */
+    public function ChangeUploadStatus(Request $request,string $id)
+    {
+        $evidance = Evidance::where('id',$id)->first();
+        $evidance->status=$request->input('changestatus');
+        $evidance->save();
+        return redirect()->back();
+    }
 }

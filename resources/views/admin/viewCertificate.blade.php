@@ -31,19 +31,19 @@
                                 @foreach ($certificate as $record)
                                     <tr>
                                         <td class="text-center">{{ $record->id }}</td>
-                                        <td class="text-center">{{ $record->clients}}</td>
+                                        <td class="text-center">{{ $record->clients->name }}</td>
                                         <td class="text-center">{{ $record->status }}</td>
                                         <td class="text-center">{{ $record->type }}</td>
                                         <td class="text-center">{{ $record->created_at->format('d-m-Y') }}</td>
                                         <td class="text-center">{{ $record->updated_at->format('d-m-Y') }}</td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
+                                            <a href="{{ Route('certificate_full_read', ['id' => $record->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Full View</a>
                                         </td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
+                                            <a href="{{Route('certificate_update_form',['id' => $record->id])}}" class="btn btn-sm btn-warning"><i class="fa fa-pen"></i> Edit</a>
                                         </td>
                                         <td class="text-center">
-                                            <a href="javascript:;" class="btn btn-danger btn-sm delete-btn" data-url="#"><i class="fa fa-trash"></i>
+                                            <a href="javascript:;" class="btn btn-danger btn-sm delete-btn" data-url="{{Route('certificate_delete',['id' => $record->id])}}"><i class="fa fa-trash"></i>
                                                 Delete</a>
                                         </td>
                                     </tr>

@@ -15,11 +15,6 @@
                             <h3 class="card-title">Upcoming</h3>
                         </div>
                         <div class="card-body">
-                            <h2>Next Version</h2>
-                            <li><span>DO ALL (CRED) OPREATION FOR (CERTIFICATE)</span></li>
-                            <li><span>MAKE SURE NOT TO DELETE THE LOGGED IN USER</span></li>
-                            <li><span>ADD MORE CUSTOM REQUESTS TO ALL FORMS</span></li>
-                            <li><span>MORE CODE OPTIMIZATION AND BUG FIXS</span></li>
                             <h2>Next Phase V3</h2>
                             <li><span>ADD PERMISIONS TO USER SIDE (USER/ADMIN)*</span></li>
                             <li><span>MAKE A TRANING COURSES TO THE USER*</span></li>

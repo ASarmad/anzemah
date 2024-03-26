@@ -9,6 +9,7 @@ use App\Models\Evidance;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
@@ -91,6 +92,22 @@ class ClientController extends Controller
     {
         $client = Client::get();
         return view('admin.viewClient', ['client' => $client]);
+    }
+    //TODO:WORKING HERE //
+    public function clientFullRead($id)
+    {
+        $client = Client::where('id',$id)->first(); 
+        $certificate=Certificate::where('client_id',$client->id)->where('status','Valid')->first();
+        $pass=Evidance::where('certificate_id',$certificate->id)->where('status','Pass')->count();
+        $passcomment=Evidance::where('certificate_id',$certificate->id)->where('status','Pass Comment')->count();
+
+        $oldCertificates=Certificate::where('client_id',$client->id)->whereNot('status','Valid')->get();
+
+        $diff=Carbon::parse($certificate->targetdate);
+        $now=Carbon::now();
+        $remining=$diff->diffInDays($now);
+
+        return view('admin.viewFullClient', ['client' => $client,'certificate'=>$certificate,'oldCertificates'=>$oldCertificates,'remining'=>$remining,'pass'=>$pass,'passcomment'=>$passcomment]);
     }
 
     public function clientUpdate(ClientCreateUpdateRequest $request,$id,$oldLogo)

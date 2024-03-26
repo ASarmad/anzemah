@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AdminCreateRequest extends FormRequest
+class UserClientCreateUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -55,7 +55,7 @@ class AdminCreateRequest extends FormRequest
     {
         $attributes = [
             'email' => 'Email',
-            'name' => 'Full Name',
+            'name' => 'Name',
             'password' => 'Password',
             'comfirmpassword' => 'Comfirm Password',
         ];

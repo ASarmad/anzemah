@@ -18,14 +18,14 @@
                            @csrf
                            <div class="card-body">
                               <div class="form-group">
-                                    <div class="form-group">
-                                       <label>Add Certificate To Selected Client</label>
-                                       <select class="custom-select" name="client">
-                                          @foreach ($clients as $record)
-                                             <option value="{{ $record->name }}">{{ $record->name }}</option>
-                                          @endforeach
-                                       </select>
-                                    </div>
+                                 <label>Add Certificate To Selected Client</label>
+                                 <select class="custom-select" name="client">
+                                    @foreach ($clients as $record)
+                                       <option value="{{ $record->id }}">{{ $record->name }}</option>
+                                    @endforeach
+                                 </select>
+                              </div>
+                              <div class="form-group">
                                     <label>year</label>
                                     <input type="text" class="form-control" name="year" placeholder="Year">
                               </div>
@@ -66,11 +66,11 @@
                                     </div>
                               </div>
                               <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input">
+                                    <input type="checkbox" class="form-check-input"b name="auto_evidance" checked>
                                     <label class="form-check-label">Auto Add Evidances To Certificate</label>
                               </div>
                               <div>
-                                    <button type="submit" class="btn btn-primary">Add Client</button>
+                                    <button type="submit" class="btn btn-primary">Add Certificate</button>
                               </div>
                            </div>
                         </form>
@@ -86,9 +86,9 @@
       var validOption = document.getElementById('validOption');
       var pendingOption = document.getElementById('pendingOption');
 
-      if (this.value === 'pending') {
+      if (this.value === 'Pending') {
             validInputs.style.display = 'none';
-      } else if (this.value === 'valid') {
+      } else if (this.value === 'Valid') {
             validInputs.style.display = 'block';
       } else {
             validInputs.style.display = 'block';

@@ -1,10 +1,17 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\EvidancesController;
+use App\Http\Controllers\UploadsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Evidance;
 use App\Models\Certificate;
 use App\Models\Client;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +24,11 @@ use App\Models\User;
 |
 */
 
+/*
+*
+* The start route of the website
+*/
 Auth::routes();
-
-// The start route of the website //
 Route::get('/', function () {
     if (Auth::check()) {
         if(auth()->user()->role==='user'){
@@ -31,86 +40,133 @@ Route::get('/', function () {
         return view('auth.login');
     }
 });
-
-// the 2 main controllers for each user  to control the whole dashboard //
-Route::get('/adashboard',[App\Http\Controllers\AdminController::class, 'index'] )->name('dashboardAdmin')->middleware('auth');
-Route::get('/cdashboard',[App\Http\Controllers\ClientController::class, 'index'] )->name('dashboardClient')->middleware('auth');
+/*
+*
+* the 2 main controllers for each user  to control the whole dashboard
+*/
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/adashboard',[AdminController::class, 'index'] )->name('dashboardAdmin');
+    Route::get('/cdashboard',[ClientController::class, 'index'] )->name('dashboardClient');
+});
 /*
 *
 *
 * The User Routes
 * 
 */
-// Evidance Model //
-Route::get('/cdashboard/evidance', [App\Http\Controllers\EvidancesController::class, 'evidanceRead'])->name('evidance_read')->middleware('auth');
-Route::get('/cdashboard/evidance/{id}', [App\Http\Controllers\EvidancesController::class, 'singleEvidanceRead'])->name('single_evidance_read')->middleware('auth');
+Route::group(['prefix' => '/cdashboard', 'middleware' => ['auth']], function () {
+    // User Model //
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/setting', function(){ return view('user.setting'); })->name('setting');
+        Route::post('/setting/password', 'passwordUpdate')->name('setting_password_update');
+    }); 
 
-// Upload Model //
-Route::post('/cdashboard/evidance/{id}/create', [App\Http\Controllers\UploadsController::class, 'uploadCreate'])->name('upload_create')->middleware('auth');
-Route::post('/cdashboard/evidance/{id}/delete/{fileid}', [App\Http\Controllers\UploadsController::class, 'uploadDestroy'])->name('upload_destroy')->middleware('auth');
+    // Evidance Model //    
+    Route::controller(EvidancesController::class)->group(function () {
+        Route::get('/evidance', 'evidanceRead')->name('evidance_read');
+        Route::get('/evidance/{id}', 'singleEvidanceRead')->name('single_evidance_read');
+    }); 
+    
+    // Uploads Model //
+    Route::controller(UploadsController::class)->group(function () {     
+        Route::post('/evidance/{id}/create', 'uploadCreate')->name('upload_create');
+        Route::post('/evidance/{id}/delete/{fileid}', 'uploadDestroy')->name('upload_destroy');
+    }); 
 
-// Comment Model //
-Route::post('/cdashboard/evidance/{id}/comment/create', [App\Http\Controllers\CommentsController::class, 'commentCreate'])->name('comment_create')->middleware('auth');
-Route::post('/cdashboard/evidance/{id}/comment/delete/{commentid}', [App\Http\Controllers\CommentsController::class, 'commentDestroy'])->name('comment_destroy')->middleware('auth');
+    // Comment Model //
+    Route::controller(CommentsController::class)->group(function () {
+        Route::post('/evidance/{id}/comment/create', 'commentCreate')->name('comment_create');
+        Route::post('/evidance/{id}/comment/delete/{commentid}', 'commentDestroy')->name('comment_destroy');
+    }); 
 
-// User Model //
-Route::get('/cdashboard/setting', function(){ return view('user.setting'); })->name('setting')->middleware('auth');
-Route::post('/cdashboard/setting/password', [App\Http\Controllers\UserController::class, 'passwordUpdate'])->name('setting_password_update')->middleware('auth');
-
-// Contact_Us Model //
-Route::get('/cdashboard/contactus', function(){ return view('user.contactus'); })->name('contactus')->middleware('auth');
-Route::post('/cdashboard/contactus/create', [App\Http\Controllers\ContactUsController::class, 'contactUsCreate'])->name('contactus_create')->middleware('auth');
+    // Contact_Us Model //
+    Route::controller(UserController::class)->group(function () { 
+        Route::get('/cdashboard/contactus', function(){ return view('user.contactus'); })->name('contactus');
+        Route::post('/cdashboard/contactus/create', 'contactUsCreate')->name('contactus_create'); 
+    }); 
+});
 /*
 *   
 *
 * The Admin Routes 
 *
 */
-// User Model //
-Route::get('/adashboard/addAdmin', function(){ return view('admin.addAdmin'); })->name('admin_create_form')->middleware('auth');
-Route::post('/adashboard/addAdmin/create', [App\Http\Controllers\UserController::class, 'adminCreate'])->name('admin_create')->middleware('auth');
-Route::get('/adashboard/viewAdmin', [App\Http\Controllers\UserController::class, 'adminRead'])->name('admin_read')->middleware('auth');
-Route::get('/adashboard/viewAdmin/{id}', function($id){ 
-    $user = User::findOrFail($id);
-    return view('admin.updateAdmin', ['user' => $user]);
- })->name('admin_update_form')->middleware('auth');
- Route::put('/adashboard/viewAdmin/{id}/Update', [App\Http\Controllers\UserController::class, 'adminUpdate'])->name('admin_update')->middleware('auth');
- Route::delete('/adashboard/viewAdmin/{id}/Delete', [App\Http\Controllers\UserController::class, 'adminDelete'])->name('admin_delete')->middleware('auth');
+Route::group(['prefix' => '/adashboard', 'middleware' => ['auth']], function () {
+    // User Model //
+    Route::controller(UserController::class)->group(function () {
+        // For: Admin
+        Route::get('/addAdmin', function(){ return view('admin.addAdmin'); })->name('admin_create_form');
+        Route::post('/addAdmin/create','adminCreate')->name('admin_create');
+        Route::get('/viewAdmin', 'adminRead')->name('admin_read');
+        Route::get('/viewAdmin/{id}', function($id){ 
+            $user = User::findOrFail($id);
+            return view('admin.updateAdmin', ['user' => $user]);
+        })->name('admin_update_form');
+        Route::put('/viewAdmin/{id}/Update', 'adminUpdate')->name('admin_update');
+        Route::delete('/viewAdmin/{id}/Delete','adminDelete')->name('admin_delete');
 
- // User & Client Model //
- Route::get('/adashboard/addUserToClient', function(){ return view('admin.addUserToClient'); })->name('user_client_create_form')->middleware('auth');
-  // TODO:WORKING HERE !!!!!!!!!!!!!!
- Route::post('/adashboard/addUserToClient/create', [App\Http\Controllers\UserController::class, 'adminCreate'])->name('admin_create')->middleware('auth');
- Route::get('/adashboard/viewClientUsers', [App\Http\Controllers\UserController::class, 'adminRead'])->name('admin_read')->middleware('auth');
+        // For : User 
+        Route::get('/addUserToClient', function(){ 
+            $clients = Client::get();
+            return view('admin.addUserToClient', ['clients' => $clients]); 
+        })->name('user_client_create_form');
+        Route::post('/addUserToClient/create','userClientCreate')->name('user_client_create');
+        Route::get('/viewUser', 'userRead')->name('user_read');
+        Route::get('/viewUser/{id}', function($id){ 
+            $user = User::findOrFail($id);
+            return view('admin.updateUser', ['user' => $user]);
+        })->name('user_update_form');
+        Route::put('/viewUser/{id}/Update', 'userUpdate')->name('user_update');
+        Route::delete('/viewUser/{id}/Delete', 'userDelete')->name('user_delete');
+    });  
 
-// Client Model //
-Route::get('/adashboard/addClient', function(){ return view('admin.addClient'); })->name('client_create_form')->middleware('auth');
-Route::post('/adashboard/addClient/create', [App\Http\Controllers\ClientController::class, 'clientCreate'])->name('client_create')->middleware('auth');
-Route::get('/adashboard/viewClient', [App\Http\Controllers\ClientController::class, 'clientRead'])->name('client_read')->middleware('auth');
-// TODO:CHANGE NAMING HERE FOR THIS ROUTES
-Route::get('/adashboard/viewClient/client={id}', [App\Http\Controllers\AdminController::class, 'viewFullClient'])->name('viewFullClient')->middleware('auth');
-// TODO END
-Route::get('/adashboard/viewClient/{id}', function($id){ 
-    $client = Client::findOrFail($id);
-    return view('admin.updateClient', ['client' => $client]);
- })->name('client_update_form')->middleware('auth');
-Route::put('/adashboard/viewClient/{id}/{oldLogo}/Update', [App\Http\Controllers\ClientController::class, 'clientUpdate'])->name('client_update')->middleware('auth');
-Route::delete('/adashboard/viewClient/{id}/delete', [App\Http\Controllers\ClientController::class, 'clientDelete'])->name('client_delete')->middleware('auth');
+    // Client Model //
+    Route::controller(ClientController::class)->group(function () {
+        Route::get('/addClient', function(){ return view('admin.addClient'); })->name('client_create_form');
+        Route::post('/addClient/create',  'clientCreate')->name('client_create');
+        Route::get('/viewClient', 'clientRead')->name('client_read');
+        Route::get('/viewClient/client/{id}', 'clientFullRead')->name('client_full_read');
+        Route::get('/viewClient/{id}', function($id){ 
+            $client = Client::findOrFail($id);
+            return view('admin.updateClient', ['client' => $client]);
+        })->name('client_update_form');
+        Route::put('/viewClient/{id}/{oldLogo}/Update',  'clientUpdate')->name('client_update');
+        Route::delete('/viewClient/{id}/delete',  'clientDelete')->name('client_delete');
 
-// Certificate Model //
-Route::get('/adashboard/addCertificate', function(){ 
-    $clients = Client::get();
-    return view('admin.addCertificate', ['clients' => $clients]);
- })->name('certificate_create_form')->middleware('auth');
-Route::post('/adashboard/addCertificate/create', [App\Http\Controllers\AdminController::class, ''])->name('certificate_create')->middleware('auth');
-Route::get('/adashboard/viewCertificate', [App\Http\Controllers\AdminController::class, 'certificateRead'])->name('certificate_read')->middleware('auth');
+    });  
 
-// Evidance Model //
-Route::get('/adashboard/viewClient/{id}/{file}', [App\Http\Controllers\AdminController::class, 'viewClientUploads'])->name('viewClientUploads')->middleware('auth');
-Route::get('/adashboard/viewClient/{id}/{file}/update', [App\Http\Controllers\AdminController::class, 'ChangeUploadStatus'])->name('changestatus')->middleware('auth');
+    // Certificate Model //
+    Route::controller(CertificateController::class)->group(function () {
+        Route::get('/addCertificate', function(){ 
+            $clients = Client::get();
+            return view('admin.addCertificate', ['clients' => $clients]);
+        })->name('certificate_create_form');
+        Route::post('/addCertificate/create', 'certificateCreate')->name('certificate_create');
+        Route::get('/viewCertificate', 'certificateRead')->name('certificate_read');
+        Route::get('/viewCertificate/{id}', function($id){ 
+            $certificate = Certificate::findOrFail($id);
+            return view('admin.updateCertificate', ['certificate' => $certificate]);
+        })->name('certificate_update_form');
+        Route::put('/viewCertificate/{id}/Update', 'certificateUpdate')->name('certificate_update');
+        Route::delete('/viewCertificate/{id}/delete', 'certificateDelete')->name('certificate_delete');
+        //NOTE: THIS ROUTE IS WORKING IN THE EVIDANCE ROUTES //
+        Route::get('/viewCertificate/certificate/{id}', 'certificateFullRead')->name('certificate_full_read');
+    }); 
 
-// Version Relase & Upcoming//
-Route::get('/adashboard/relase', function(){ return view('admin.layouts.relase'); })->name('relase')->middleware('auth');
-Route::get('/adashboard/upcoming', function(){ return view('admin.layouts.upcoming'); })->name('upcoming')->middleware('auth');
+    // Evidance Model //
+    Route::controller(EvidancesController::class)->group(function () {
+        // TODO: FIX NAMING
+        Route::get('/viewCertificate/certificate/{id}/q{file}', 'viewClientUploads')->name('viewClientUploads');
+        Route::get('/viewCertificate/certificate/{id}/q{file}/update', 'ChangeUploadStatus')->name('changestatus');
+        // TODO END
+    }); 
+
+    // Version Relase & Upcoming//
+    Route::get('/relase', function(){ return view('admin.layouts.relase'); })->name('relase');
+    Route::get('/upcoming', function(){ return view('admin.layouts.upcoming'); })->name('upcoming');
+});
+
+
+
 
 
